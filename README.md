@@ -1,4 +1,4 @@
-# Canopy Prototype
+# Orchard Canopy Prototype
 
 This Orchard Canopy project is a proof of concept to demonstrate loading & rendering of content items within WebAssembly using Blazor.
 Key aspects to demonstrate are:
