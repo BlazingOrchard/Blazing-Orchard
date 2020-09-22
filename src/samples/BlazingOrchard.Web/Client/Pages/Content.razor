@@ -1,0 +1,7 @@
+﻿@page "/{*alias}"
+
+<ContentItemView Alias="@Alias" />
+
+@code {
+    [Parameter] public string? Alias { get; set; }
+}

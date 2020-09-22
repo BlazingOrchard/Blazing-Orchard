@@ -1,17 +1,18 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using BlazingOrchard.Abstractions.Services;
+using BlazingOrchard.Contents.Services;
+using BlazingOrchard.Services;
 using OrchardCore.Client.Models;
 using OrchardCore.Client.Services;
 
 namespace BlazingOrchard.Web.Client
 {
-    public class OrchardApiContentSource : IContentSource
+    public class OrchardApiContentProvider : IContentProvider
     {
         private readonly IAutorouteEntries _autorouteEntries;
         private readonly IContentClient _contentClient;
 
-        public OrchardApiContentSource(IAutorouteEntries autorouteEntries, IContentClient contentClient)
+        public OrchardApiContentProvider(IAutorouteEntries autorouteEntries, IContentClient contentClient)
         {
             _autorouteEntries = autorouteEntries;
             _contentClient = contentClient;

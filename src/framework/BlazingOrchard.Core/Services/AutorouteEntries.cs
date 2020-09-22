@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BlazingOrchard.Abstractions.Services;
+using BlazingOrchard.Services;
 
 namespace BlazingOrchard.Core.Services
 {

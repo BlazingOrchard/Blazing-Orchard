@@ -1,4 +1,4 @@
-﻿namespace BlazingOrchard.Abstractions.Services
+﻿namespace BlazingOrchard.Services
 {
     public interface IAutorouteEntries
     {

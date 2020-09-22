@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <RootNamespace>BlazingOrchard.Contents</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BlazingOrchard.DisplayManagement\BlazingOrchard.DisplayManagement.csproj" />
+      <ProjectReference Include="..\framework\BlazingOrchard.Abstractions\BlazingOrchard.Abstractions.csproj" />
+      <ProjectReference Include="..\framework\BlazingOrchard.Core\BlazingOrchard.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Models" />
+    </ItemGroup>
+
+</Project>

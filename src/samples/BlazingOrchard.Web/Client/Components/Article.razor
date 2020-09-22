@@ -1,0 +1,12 @@
+﻿@using OrchardCore.Client.Models
+<h1>Article Shape!</h1>
+<h3>@ContentItem.DisplayText</h3>
+
+@code {
+
+    [Parameter]
+    public dynamic Model { get; set; }
+
+    public ContentItem ContentItem => Model.ContentItem;
+
+}

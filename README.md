@@ -1,6 +1,6 @@
 # Blazing Orchard Prototype
 
-Blazing Orchard turns your [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) project into a CMS-powered Blazor application by leveraging [Orchard Core](https://github.com/OrchardCMS/OrchardCore/blob/dev/README.md) as a decoupled backend/CMS server using its REST & GraphQL APIs.
+Blazing Orchard is a modular application framework that turns your [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) project into a CMS-powered Blazor application by leveraging [Orchard Core](https://github.com/OrchardCMS/OrchardCore/blob/dev/README.md) as a decoupled backend/CMS server using its REST & GraphQL APIs.
 
 Orchard Core is a powerful open source application framework built with ASP.NET Core, providing a rich set of modules and features.
 

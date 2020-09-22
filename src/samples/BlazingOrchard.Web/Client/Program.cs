@@ -1,6 +1,10 @@
 using System.Threading.Tasks;
-using BlazingOrchard.Abstractions.Services;
+using BlazingOrchard.Contents.Display;
+using BlazingOrchard.Contents.Services;
 using BlazingOrchard.Core.Services;
+using BlazingOrchard.DisplayManagement.Services;
+using BlazingOrchard.Services;
+using BlazingOrchard.Web.Client.Drivers;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.Client.Extensions;
@@ -21,9 +25,12 @@ namespace BlazingOrchard.Web.Client
                     options.Bind(builder.Configuration.GetSection("Orchard"));
                 })
                 .AddSingleton<IAutorouteEntries, AutorouteEntries>()
-                .AddSingleton<IContentSource, OrchardApiContentSource>()
+                .AddSingleton<IContentProvider, OrchardApiContentProvider>()
                 .AddSingleton<IShapeFactory, ShapeFactory>()
-                .AddSingleton<IDisplayManager, DisplayManager>();
+                .AddSingleton<IContentDisplayManager, ContentDisplayManager>()
+                .AddSingleton<IContentDisplayHandler, ContentItemDisplayCoordinator>()
+                .AddSingleton<IContentDisplayDriver, ArticleDriver>()
+                .AddSingleton<IShapeMapProvider, DemoShapeMapProvider>();
 
             await builder.Build().RunAsync();
         }
