@@ -1,12 +1,14 @@
-# Orchard Canopy Prototype
+# Blazing Orchard Prototype
 
-This Orchard Canopy project is a proof of concept to demonstrate loading & rendering of content items within WebAssembly using Blazor.
-Key aspects to demonstrate are:
+Blazing Orchard turns your Blazor project into an [Orchard Core](https://github.com/OrchardCMS/OrchardCore/blob/dev/README.md)-powered Blazor application by leveraging Orchard Core as a decoupled backend/CMS server using its REST & GraphQL APIs.
+Orchard Core is a powerful open source application framework built with ASP.NET Core, providing a rich set of modules and features.
 
-1. Navigating to content item routes using the catch-all route.
-1. Translating content aliases to content item ids.
-1. Loading content items using the Contents API controller.
-1. Rendering content items using Razor components within WebAssembly.
-1. Configuring what shapes to display using specific components.
-1. Providing a default set of components for built-in shapes, such as Content, TitlePart, TextField.
-1. Demonstrating specialized components for specific content types using shape-component configuration.
+With Orchard Core, you have a strong, fully customizable backend system straight out of the box that allows you to manage content, workflows, and what not.
+With Blazing Orchard, you build your SPA application as you normally would, but powered by a backend that provides your application with things like pages and blog posts, and of course any other feature exposed through the Orchard Core API endpoints.
+
+
+With Blazing Orchard, you can:
+
+1. Navigate to content items managed from Orchard, but rendered within Blazor.
+1. Render shapes mapped to components, bringing the power of shapes to Blazor.
+1. Consume APIs from custom Orchard Core modules.
