@@ -1,0 +1,18 @@
+﻿@using OrchardCanopy.Abstractions.Services
+@page "/{*alias}"
+@if (ContentItem != null)
+{
+    <ContentItemView ContentItem="@ContentItem" />
+}
+
+@code
+{
+    [Parameter] public string Alias { get; set; } = default!;
+    [Inject] private IContentSource ContentSource { get; set; } = default!;
+    private ContentItem ContentItem { get; set; } = default!;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        ContentItem = await ContentSource.GetByAliasAsync(Alias);
+    }
+}

@@ -1,0 +1,12 @@
+﻿<h2>Content Item View</h2>
+
+@if (ContentItem != null)
+{
+    <h3>@ContentItem.DisplayText</h3>
+    <p>@ContentItem.ContentType</p>
+}
+
+@code {
+    [Parameter] public ContentItem? ContentItem { get; set; }
+    [Parameter] public string? DisplayType { get; set; }
+}
