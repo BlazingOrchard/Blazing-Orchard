@@ -6,6 +6,6 @@ namespace BlazingOrchard.Contents.Services
 {
     public interface IContentDisplayHandler
     {
-        Task BuildDisplayAsync(ContentItem contentItem, BuildDisplayContext context);
+        ValueTask BuildDisplayAsync(ContentItem contentItem, BuildDisplayContext context);
     }
 }
