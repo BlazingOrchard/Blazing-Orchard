@@ -5,7 +5,7 @@
 @code {
 
     [Parameter]
-    public dynamic Model { get; set; }
+    public dynamic Model { get; set; } = default!;
 
     public ContentItem ContentItem => Model.ContentItem;
 

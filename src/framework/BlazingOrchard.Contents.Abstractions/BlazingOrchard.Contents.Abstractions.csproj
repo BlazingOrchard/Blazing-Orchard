@@ -10,8 +10,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\libraries\OrchardCore.Client\OrchardCore.Client.csproj" />
       <ProjectReference Include="..\BlazingOrchard.DisplayManagement\BlazingOrchard.DisplayManagement.csproj" />
-      <ProjectReference Include="..\framework\BlazingOrchard.Abstractions\BlazingOrchard.Abstractions.csproj" />
-      <ProjectReference Include="..\framework\BlazingOrchard.Core\BlazingOrchard.Core.csproj" />
     </ItemGroup>
 
 </Project>
