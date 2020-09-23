@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlazingOrchard.Contents.Display.Services;
+using BlazingOrchard.Contents.Models;
 using BlazingOrchard.Contents.Services;
 using BlazingOrchard.DisplayManagement.Models;
 using BlazingOrchard.DisplayManagement.Services;
 using BlazingOrchard.DisplayManagement.Shapes;
-using BlazingOrchard.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using OrchardCore.Client.Models;
 
 namespace BlazingOrchard.Contents.Components
 {
@@ -34,7 +34,7 @@ namespace BlazingOrchard.Contents.Components
             {
                 Shape = await ContentDisplayManager.BuildDisplayAsync(ContentItem, DisplayType);
 
-                var shapeMapProvider = ShapeMapProviders.FirstOrDefault(x => x.CanRender(Shape));
+                var shapeMapProvider = ShapeMapProviders.FirstOrDefault(x => x.GetSupportsShape(Shape));
 
                 if (shapeMapProvider != null)
                 {

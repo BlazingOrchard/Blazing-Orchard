@@ -1,13 +1,13 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using OrchardCore.Client.Models;
+using BlazingOrchard.Contents.Models;
 using Refit;
 
 namespace OrchardCore.Client.Services
 {
     public interface IContentClient
     {
-        [Get("/api/content/{contentItemId}")]
-        Task<ContentItem> GetByIdAsync(string contentItemId, CancellationToken cancellationToken = default);
+        [Get("/api/content-items/by-alias/{alias}")]
+        Task<ContentItem> GetByAliasAsync(string alias, CancellationToken cancellationToken = default);
     }
 }

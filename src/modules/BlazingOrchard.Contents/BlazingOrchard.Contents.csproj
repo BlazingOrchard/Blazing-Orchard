@@ -13,9 +13,10 @@
 
 
     <ItemGroup>
+      <ProjectReference Include="..\..\framework\BlazingOrchard.Abstractions\BlazingOrchard.Abstractions.csproj" />
       <ProjectReference Include="..\..\framework\BlazingOrchard.Contents.Abstractions\BlazingOrchard.Contents.Abstractions.csproj" />
-      <ProjectReference Include="..\..\framework\BlazingOrchard.Core\BlazingOrchard.Core.csproj" />
-      <ProjectReference Include="..\..\framework\BlazingOrchard.DisplayManagement\BlazingOrchard.DisplayManagement.csproj" />
+      <ProjectReference Include="..\..\framework\BlazingOrchard.Contents.Display\BlazingOrchard.Contents.Display.csproj" />
+      <ProjectReference Include="..\..\libraries\OrchardCore.Client\OrchardCore.Client.csproj" />
     </ItemGroup>
 
 </Project>

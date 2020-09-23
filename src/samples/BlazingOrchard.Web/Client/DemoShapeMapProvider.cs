@@ -10,10 +10,7 @@ namespace BlazingOrchard.Web.Client
 {
     public class DemoShapeMapProvider : IShapeMapProvider
     {
-        public bool CanRender(IShape shape)
-        {
-            return ((dynamic)shape).ContentItem.ContentType == "Article";
-        }
+        public bool GetSupportsShape(IShape shape) => ((dynamic)shape).ContentItem.ContentType == "Article";
 
         public ValueTask<ComponentDescriptor> DescribeComponentAsync(IShape shape, CancellationToken cancellationToken = default)
         {

@@ -7,7 +7,7 @@ namespace BlazingOrchard.DisplayManagement.Services
 {
     public interface IShapeMapProvider
     {
-        bool CanRender(IShape shape);
+        bool GetSupportsShape(IShape shape);
         ValueTask<ComponentDescriptor> DescribeComponentAsync(IShape shape, CancellationToken cancellationToken = default);
     }
 }

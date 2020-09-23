@@ -12,7 +12,7 @@
 
 @code {
 
-    private ICollection<Type> ModuleTypes = new[] { typeof(BlazingOrchard.Contents.Module) };
+    private ICollection<Type> ModuleTypes = new[] { typeof(BlazingOrchard.Contents.Startup) };
     private ICollection<Assembly> ModuleAssemblies => ModuleTypes.Select(x => x.Assembly).ToList();
 
 }

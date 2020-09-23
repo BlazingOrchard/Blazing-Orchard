@@ -1,13 +1,14 @@
+using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
-using BlazingOrchard.Contents.Display;
+using BlazingOrchard.Contents.Display.Services;
 using BlazingOrchard.Contents.Services;
-using BlazingOrchard.Core.Services;
 using BlazingOrchard.DisplayManagement.Services;
-using BlazingOrchard.Services;
+using BlazingOrchard.Extensions;
 using BlazingOrchard.Web.Client.Drivers;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OrchardCore.Client.Extensions;
 
 namespace BlazingOrchard.Web.Client
 {
@@ -20,19 +21,17 @@ namespace BlazingOrchard.Web.Client
             builder.RootComponents.Add<App>("#app");
 
             services
-                .AddOrchardApiClient(options =>
-                {
-                    options.Bind(builder.Configuration.GetSection("Orchard"));
-                })
-                .AddSingleton<IAutorouteEntries, AutorouteEntries>()
-                .AddSingleton<IContentProvider, OrchardApiContentProvider>()
-                .AddSingleton<IShapeFactory, ShapeFactory>()
-                .AddSingleton<IContentDisplayManager, ContentDisplayManager>()
-                .AddSingleton<IContentDisplayHandler, ContentItemDisplayCoordinator>()
+                .AddSingleton<IConfiguration>(builder.Configuration)
+                .AddModules(GetModuleAssemblies())
                 .AddSingleton<IContentDisplayDriver, ArticleDriver>()
                 .AddSingleton<IShapeMapProvider, DemoShapeMapProvider>();
 
             await builder.Build().RunAsync();
+        }
+
+        private static IEnumerable<Assembly> GetModuleAssemblies()
+        {
+            yield return typeof(BlazingOrchard.Contents.Startup).Assembly;
         }
     }
 }

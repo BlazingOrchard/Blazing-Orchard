@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <RootNamespace>BlazingOrchard.Contents</RootNamespace>
     </PropertyGroup>
-
+    
     <ItemGroup>
-      <ProjectReference Include="..\..\libraries\OrchardCore.Client\OrchardCore.Client.csproj" />
-      <ProjectReference Include="..\BlazingOrchard.DisplayManagement\BlazingOrchard.DisplayManagement.csproj" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0-rc.1.20451.14" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models" />
+      <ProjectReference Include="..\BlazingOrchard.DisplayManagement\BlazingOrchard.DisplayManagement.csproj" />
     </ItemGroup>
 
 </Project>
