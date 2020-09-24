@@ -5,9 +5,9 @@ using BlazingOrchard.DisplayManagement.Shapes;
 
 namespace BlazingOrchard.DisplayManagement.Services
 {
-    public interface IShapeMapProvider
+    public interface IShapeMapRule
     {
-        bool GetSupportsShape(IShape shape);
+        bool Matches(IShape shape);
         ValueTask<ComponentDescriptor> DescribeComponentAsync(IShape shape, CancellationToken cancellationToken = default);
     }
 }

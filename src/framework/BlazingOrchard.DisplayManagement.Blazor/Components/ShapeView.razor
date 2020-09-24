@@ -13,14 +13,14 @@
     public IShape Shape { get; set; } = default!;
 
     [Inject]
-    private IEnumerable<IShapeMapProvider> ShapeMapProviders { get; set; } = default!;
+    private IEnumerable<IShapeMapRule> ShapeMapProviders { get; set; } = default!;
 
     private ComponentDescriptor? ComponentDescriptor { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
         ComponentDescriptor = null;
-        var shapeMapProvider = ShapeMapProviders.FirstOrDefault(x => x.GetSupportsShape(Shape));
+        var shapeMapProvider = ShapeMapProviders.FirstOrDefault(x => x.Matches(Shape));
 
         if (shapeMapProvider != null)
             ComponentDescriptor = await shapeMapProvider.DescribeComponentAsync(Shape);
@@ -28,6 +28,7 @@
     
     private RenderFragment CreateComponent(ComponentDescriptor descriptor) => builder =>
     {
+        var componentTypeName = descriptor.ComponentType.FullName;
         builder.OpenComponent(0, descriptor.ComponentType);
         var attributeSequence = 1;
             

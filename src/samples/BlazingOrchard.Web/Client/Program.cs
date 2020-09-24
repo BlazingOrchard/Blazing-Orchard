@@ -18,15 +18,9 @@ namespace BlazingOrchard.Web.Client
 
             services
                 .AddSingleton<IConfiguration>(builder.Configuration)
-                .AddModules(GetModuleAssemblies());
+                .AddModules(Modules.GetAssemblies());
 
             await builder.Build().RunAsync();
-        }
-
-        private static IEnumerable<Assembly> GetModuleAssemblies()
-        {
-            yield return typeof(BlazingOrchard.Contents.Startup).Assembly;
-            yield return typeof(BlazingOrchard.Title.Startup).Assembly;
         }
     }
 }

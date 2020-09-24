@@ -1,0 +1,7 @@
+﻿@Html
+
+@code
+{
+    [Parameter] public dynamic Model { get; set; } = default!;
+    private MarkupString Html => (MarkupString)Model.Html;
+}

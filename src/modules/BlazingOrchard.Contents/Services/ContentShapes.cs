@@ -8,9 +8,9 @@ using BlazingOrchard.DisplayManagement.Shapes;
 
 namespace BlazingOrchard.Contents.Services
 {
-    public class ContentShapes : IShapeMapProvider
+    public class ContentShapes : IShapeMapRule
     {
-        public bool GetSupportsShape(IShape shape) => shape.Metadata.Type == "Content";
+        public bool Matches(IShape shape) => shape.Metadata.Type == "Content";
 
         public ValueTask<ComponentDescriptor> DescribeComponentAsync(IShape shape, CancellationToken cancellationToken = default)
         {

@@ -4,25 +4,27 @@ using System.Threading.Tasks;
 using BlazingOrchard.DisplayManagement.Models;
 using BlazingOrchard.DisplayManagement.Services;
 using BlazingOrchard.DisplayManagement.Shapes;
-using BlazingOrchard.Title.Components;
+using BlazingOrchard.Html.Components;
 
-namespace BlazingOrchard.Title.Services
+namespace BlazingOrchard.Html.Services
 {
-    public class TitleShapes : IShapeMapRule
+    public class HtmlShapes : IShapeMapRule
     {
-        public bool Matches(IShape shape) => shape.Metadata.Type == "TitlePart";
+        public bool Matches(IShape shape) => shape.Metadata.Type == "HtmlBodyPart";
 
-        public ValueTask<ComponentDescriptor> DescribeComponentAsync(IShape shape, CancellationToken cancellationToken = default)
+        public ValueTask<ComponentDescriptor> DescribeComponentAsync(
+            IShape shape,
+            CancellationToken cancellationToken = default)
         {
             var descriptor = new ComponentDescriptor
             {
-                ComponentType = typeof(TitlePart),
+                ComponentType = typeof(HtmlBodyPart),
                 Attributes = new Dictionary<string, object>
                 {
                     ["Model"] = shape
                 }
             };
-            
+
             return new ValueTask<ComponentDescriptor>(descriptor);
         }
     }

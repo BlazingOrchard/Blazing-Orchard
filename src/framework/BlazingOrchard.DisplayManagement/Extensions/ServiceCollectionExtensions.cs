@@ -6,7 +6,7 @@ namespace BlazingOrchard.DisplayManagement.Extensions
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddShapeMap<T>(this IServiceCollection services)
-            where T : class, IShapeMapProvider =>
-            services.AddSingleton<IShapeMapProvider, T>();
+            where T : class, IShapeMapRule =>
+            services.AddSingleton<IShapeMapRule, T>();
     }
 }
