@@ -1,0 +1,7 @@
+﻿<ContentItemView Handle="@Handle" />
+
+@code
+{
+    [Parameter] public string Alias { get; set; } = default!;
+    private string Handle => $"alias:{Alias}";
+}

@@ -13,6 +13,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\framework\BlazingOrchard.Abstractions\BlazingOrchard.Abstractions.csproj" />
         <ProjectReference Include="..\..\framework\BlazingOrchard.Contents.Display\BlazingOrchard.Contents.Display.csproj" />
+        <ProjectReference Include="..\BlazingOrchard.Contents\BlazingOrchard.Contents.csproj" />
     </ItemGroup>
 
 </Project>

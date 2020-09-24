@@ -7,7 +7,7 @@ namespace BlazingOrchard.OrchardCore.Client.Services
 {
     public interface IContentClient
     {
-        [Get("/api/content-items/by-alias/{alias}")]
-        Task<ContentItem> GetByAliasAsync(string alias, CancellationToken cancellationToken = default);
+        [Get("/api/content-items/by-handle/{handle}")]
+        Task<ContentItem> GetByHandleAsync(string handle, CancellationToken cancellationToken = default);
     }
 }

@@ -6,6 +6,6 @@ namespace BlazingOrchard.Contents.Services
 {
     public interface IContentProvider
     {
-        Task<ContentItem?> GetByAliasAsync(string alias, CancellationToken cancellationToken = default);
+        Task<ContentItem?> GetByHandleAsync(string handle, CancellationToken cancellationToken = default);
     }
 }

@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\framework\BlazingOrchard\BlazingOrchard.csproj" />
+      <ProjectReference Include="..\..\modules\BlazingOrchard.Menu\BlazingOrchard.Menu.csproj" />
     </ItemGroup>
 
 </Project>

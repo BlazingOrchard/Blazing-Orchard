@@ -1,0 +1,25 @@
+﻿@using BlazingOrchard.Contents.Models
+@using BlazingOrchard.Contents
+@using BlazingOrchard.Menu.Models
+
+@if (MenuItems != null && MenuItems.Any())
+{
+    <ul>
+        @foreach (var menuItem in MenuItems)
+        {
+            var linkMenuItemPart = menuItem.Get<LinkMenuItemPart>("LinkMenuItemPart");
+            <li>
+                <a href="@linkMenuItemPart!.Url">@linkMenuItemPart!.Name</a>
+            </li>
+        }
+    </ul>
+}
+
+@code {
+
+    [Parameter]
+    public dynamic Model { get; set; } = default!;
+
+    private ICollection<ContentItem> MenuItems => Model.MenuItems;
+
+}

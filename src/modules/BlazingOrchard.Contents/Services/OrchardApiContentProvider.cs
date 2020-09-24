@@ -10,8 +10,8 @@ namespace BlazingOrchard.Contents.Services
         private readonly IContentClient _contentClient;
         public OrchardApiContentProvider(IContentClient contentClient) => _contentClient = contentClient;
 
-        public async Task<ContentItem?> GetByAliasAsync(string contentItemId,
+        public async Task<ContentItem?> GetByHandleAsync(string handle,
             CancellationToken cancellationToken = default) =>
-            await _contentClient.GetByAliasAsync(contentItemId, cancellationToken);
+            await _contentClient.GetByHandleAsync(handle, cancellationToken);
     }
 }

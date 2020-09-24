@@ -1,7 +1,8 @@
-﻿@page "/{*alias}"
+﻿@page "/{*slug}"
 
-<ContentItemView Alias="@Alias" />
+<ContentItemView Handle="@Handle" />
 
 @code {
-    [Parameter] public string? Alias { get; set; }
+    [Parameter] public string? Slug { get; set; }
+    private string Handle => $"slug:{Slug}";
 }

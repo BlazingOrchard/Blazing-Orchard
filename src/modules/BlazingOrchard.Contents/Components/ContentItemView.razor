@@ -1,8 +1,5 @@
 ﻿@using BlazingOrchard.Contents.Models
 @using BlazingOrchard.Contents.Services
-@using BlazingOrchard.DisplayManagement.Models
-@using BlazingOrchard.DisplayManagement.Blazor.Components
-@using BlazingOrchard.DisplayManagement.Shapes
 @using BlazingOrchard.Contents.Display.Services
 
 @if (Shape != null)
@@ -12,7 +9,7 @@
 
 @code {
     [Parameter] public ContentItem? ContentItem { get; set; }
-    [Parameter] public string? Alias { get; set; }
+    [Parameter] public string? Handle { get; set; }
     [Parameter] public string? DisplayType { get; set; }
     [Inject] private IContentProvider ContentProvider { get; set; } = default!;
     [Inject] private IContentDisplayManager ContentDisplayManager { get; set; } = default!;
@@ -20,8 +17,8 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        if (!string.IsNullOrWhiteSpace(Alias))
-            ContentItem = await ContentProvider.GetByAliasAsync(Alias);
+        if (!string.IsNullOrWhiteSpace(Handle))
+            ContentItem = await ContentProvider.GetByHandleAsync(Handle);
 
         if (ContentItem != null)
             Shape = await ContentDisplayManager.BuildDisplayAsync(ContentItem, DisplayType);
