@@ -8,8 +8,16 @@ With Orchard Core, you have a strong, fully customizable backend system straight
 
 With Blazing Orchard, you build your SPA application as you normally would, but powered by a backend that provides your application with things like pages and blog posts, and of course any other feature exposed through the Orchard Core API endpoints.
 
-With Blazing Orchard, you can:
+## Features
 
-1. Navigate to content items managed from Orchard, but rendered within Blazor.
-1. Render shapes mapped to components, bringing the power of shapes to Blazor.
-1. Consume APIs from custom Orchard Core modules.
+[x] Navigate to content items managed from Orchard, rendered within Blazor.
+[x] Render shapes mapped to components.
+[x] Consume APIs from custom Orchard Core modules.
+[] Menu component.
+[] Shape placement / ordering / alternates.
+[] Embed within an Orchard Core Theme and initialize the Blazor app without explicitly specifying the host URL.
+[] Offline mode (initialize Blazor using a JSON export of the site).
+
+## Getting Started
+
+Coming soon.
