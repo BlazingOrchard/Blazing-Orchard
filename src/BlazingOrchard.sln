@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingOrchard.ContentField
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingOrchard", "framework\BlazingOrchard\BlazingOrchard.csproj", "{3762B1C8-D19B-4B06-B12A-1711BE4474DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingOrchard.Web.Application", "samples\BlazingOrchard.Web.Application\BlazingOrchard.Web.Application.csproj", "{4F19134B-7B6E-472C-99C4-8D8781B03F33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,10 @@ Global
 		{3762B1C8-D19B-4B06-B12A-1711BE4474DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3762B1C8-D19B-4B06-B12A-1711BE4474DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3762B1C8-D19B-4B06-B12A-1711BE4474DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F19134B-7B6E-472C-99C4-8D8781B03F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F19134B-7B6E-472C-99C4-8D8781B03F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F19134B-7B6E-472C-99C4-8D8781B03F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F19134B-7B6E-472C-99C4-8D8781B03F33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,5 +130,6 @@ Global
 		{5DA0AE08-DC64-4E64-A97C-A086F9BDBF95} = {AC702ED6-C53D-4F26-BF45-752811A0F9D5}
 		{E5F86A74-6F82-4356-9DBB-0738DBA5D2F6} = {AC702ED6-C53D-4F26-BF45-752811A0F9D5}
 		{3762B1C8-D19B-4B06-B12A-1711BE4474DA} = {3529A6F1-0722-4DC5-A67D-D083F3997B78}
+		{4F19134B-7B6E-472C-99C4-8D8781B03F33} = {8C2597E9-A1E2-4896-9608-76296714798D}
 	EndGlobalSection
 EndGlobal

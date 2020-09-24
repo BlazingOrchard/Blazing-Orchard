@@ -9,14 +9,6 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.1.20451.17" />
     </ItemGroup>
 
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\background.png" />
-      <_ContentIncludedByDefault Remove="wwwroot\exampleJsInterop.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\styles.css" />
-    </ItemGroup>
-
-
     <ItemGroup>
       <ProjectReference Include="..\..\modules\BlazingOrchard.ContentFields\BlazingOrchard.ContentFields.csproj" />
       <ProjectReference Include="..\..\modules\BlazingOrchard.Contents\BlazingOrchard.Contents.csproj" />

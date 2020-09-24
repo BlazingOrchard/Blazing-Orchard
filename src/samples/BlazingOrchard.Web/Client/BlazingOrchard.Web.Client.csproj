@@ -19,6 +19,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\framework\BlazingOrchard\BlazingOrchard.csproj" />
+	  <ProjectReference Include="..\..\BlazingOrchard.Web.Application\BlazingOrchard.Web.Application.csproj" />
 	</ItemGroup>
-
+	
 </Project>

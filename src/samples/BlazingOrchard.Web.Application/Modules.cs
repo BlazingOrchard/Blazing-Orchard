@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace BlazingOrchard.Web.Client
+namespace BlazingOrchard.Web.Application
 {
     public static class Modules
     {

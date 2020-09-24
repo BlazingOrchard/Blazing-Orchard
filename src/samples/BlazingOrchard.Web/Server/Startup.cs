@@ -1,3 +1,4 @@
+using BlazingOrchard.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,9 +20,9 @@ namespace BlazingOrchard.Web.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddServerSideBlazor();
+            services.AddModules(Application.Modules.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,7 +31,6 @@ namespace BlazingOrchard.Web.Server
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebAssemblyDebugging();
             }
             else
             {
@@ -40,16 +40,14 @@ namespace BlazingOrchard.Web.Server
             }
 
             app.UseHttpsRedirection();
-            app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
-                endpoints.MapControllers();
-                endpoints.MapFallbackToFile("index.html");
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
             });
         }
     }

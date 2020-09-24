@@ -9,7 +9,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\BlazingOrchard.Web.Client.csproj" />
+    <ProjectReference Include="..\..\BlazingOrchard.Web.Application\BlazingOrchard.Web.Application.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
+  </ItemGroup>
+
   
 </Project>
