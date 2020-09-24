@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.1.20451.17" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\background.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\exampleJsInterop.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\styles.css" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\modules\BlazingOrchard.ContentFields\BlazingOrchard.ContentFields.csproj" />
+      <ProjectReference Include="..\..\modules\BlazingOrchard.Contents\BlazingOrchard.Contents.csproj" />
+      <ProjectReference Include="..\..\modules\BlazingOrchard.Html\BlazingOrchard.Html.csproj" />
+      <ProjectReference Include="..\..\modules\BlazingOrchard.Title\BlazingOrchard.Title.csproj" />
+      <ProjectReference Include="..\BlazingOrchard.Abstractions\BlazingOrchard.Abstractions.csproj" />
+      <ProjectReference Include="..\BlazingOrchard.Contents.Abstractions\BlazingOrchard.Contents.Abstractions.csproj" />
+      <ProjectReference Include="..\BlazingOrchard.Contents.Display\BlazingOrchard.Contents.Display.csproj" />
+      <ProjectReference Include="..\BlazingOrchard.DisplayManagement.Blazor\BlazingOrchard.DisplayManagement.Blazor.csproj" />
+      <ProjectReference Include="..\BlazingOrchard.DisplayManagement\BlazingOrchard.DisplayManagement.csproj" />
+      <ProjectReference Include="..\BlazingOrchard.OrchardCore.Client\BlazingOrchard.OrchardCore.Client.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,8 @@
+﻿<h3>Text Field</h3>
+@Text
+
+@code
+{
+    [Parameter] public dynamic Model { get; set; } = default!;
+    private string Text => Model.Text;
+}

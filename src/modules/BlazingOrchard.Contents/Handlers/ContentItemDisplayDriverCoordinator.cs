@@ -67,12 +67,12 @@ namespace BlazingOrchard.Contents.Handlers
         {
             var partName = contentTypePartDescriptor.Name;
             var partTypeName = contentTypePartDescriptor.Part.Name;
-            var partType = _contentParts.FirstOrDefault(x => x.GetType().Name == partTypeName)?.GetType();
+            var partType = _contentParts.FirstOrDefault(x => x.GetType().Name == partTypeName)?.GetType() ?? typeof(ContentPart);
 
             if (partType == null)
                 return;
 
-            if (!(contentItem.Get(partType, partName) is ContentPart part))
+            if (!(contentItem.Get(partType, partName) is ContentPart contentPart))
                 return;
 
             var drivers = _contentPartDisplayDrivers.Where(x => x.PartType == partType);
@@ -80,21 +80,23 @@ namespace BlazingOrchard.Contents.Handlers
 
             foreach (var driver in drivers)
             {
-                var result = await driver.BuildDisplayAsync(part, partDisplayContext);
+                var result = await driver.BuildDisplayAsync(contentPart, partDisplayContext);
                 await ApplyDisplayResultAsync(result, context);
             }
 
-            await BuildContentFieldsDisplaysAsync(contentItem, contentTypePartDescriptor, context);
+            await BuildContentFieldsDisplaysAsync(contentItem, contentPart, contentTypePartDescriptor, context);
         }
 
         private async ValueTask BuildContentFieldsDisplaysAsync(
             ContentItem contentItem,
+            ContentPart contentPart,
             ContentTypePartDescriptor contentTypePartDescriptor,
             BuildDisplayContext context)
         {
             foreach (var contentPartFieldDescriptor in contentTypePartDescriptor.Part.Fields)
                 await BuildContentFieldDisplaysAsync(
                     contentItem,
+                    contentPart,
                     contentTypePartDescriptor,
                     contentPartFieldDescriptor,
                     context);
@@ -102,6 +104,7 @@ namespace BlazingOrchard.Contents.Handlers
 
         private async ValueTask BuildContentFieldDisplaysAsync(
             ContentItem contentItem,
+            ContentPart contentPart,
             ContentTypePartDescriptor contentTypePartDescriptor,
             ContentPartFieldDescriptor contentPartFieldDescriptor,
             BuildDisplayContext context)
@@ -113,7 +116,7 @@ namespace BlazingOrchard.Contents.Handlers
             if (fieldType == null)
                 return;
 
-            if (!(contentItem.Get(fieldType, fieldName) is ContentField field))
+            if (!(contentPart.Get(fieldType, fieldName) is ContentField field))
                 return;
 
             var drivers = _contentFieldDisplayDrivers.Where(x => x.FieldType == fieldType);

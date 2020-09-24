@@ -43,6 +43,9 @@ namespace BlazingOrchard.Contents
             if (contentElement.Elements.TryGetValue(name, out var element))
                 return element;
 
+            var data = contentElement.Data.ToString();
+            var elemData = contentElement.Data[name];
+
             if (!(contentElement.Data[name] is JObject elementData))
                 return null;
 

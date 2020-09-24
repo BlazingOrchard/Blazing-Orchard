@@ -10,6 +10,6 @@ namespace BlazingOrchard.Contents.Display.Services
     public interface IContentFieldDisplayDriver
     {
         Type FieldType { get; }
-        ValueTask<IDisplayResult> BuildDisplayAsync(ContentField contentField, BuildFieldDisplayContext context);
+        ValueTask<IDisplayResult?> BuildDisplayAsync(ContentField contentField, BuildFieldDisplayContext context);
     }
 }

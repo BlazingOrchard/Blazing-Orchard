@@ -10,6 +10,7 @@ namespace BlazingOrchard.Web.Client
             yield return typeof(BlazingOrchard.Contents.Startup).Assembly;
             yield return typeof(BlazingOrchard.Title.Startup).Assembly;
             yield return typeof(BlazingOrchard.Html.Startup).Assembly;
+            yield return typeof(BlazingOrchard.ContentFields.Startup).Assembly;
         }
     }
 }
