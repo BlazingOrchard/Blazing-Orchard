@@ -14,7 +14,7 @@ namespace BlazingOrchard.Html.Drivers
                 {
                     var shape = await context.New.HtmlBodyPart();
                     shape.ContentItem = contentPart.ContentItem;
-                    shape.Html = contentPart.ContentItem.DisplayText;
+                    shape.Html = contentPart.Html;
                     shape.HtmlBodyPart = contentPart;
                     return shape;
                 });
