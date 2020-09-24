@@ -13,10 +13,10 @@ With Blazing Orchard, you build your SPA application as you normally would, but 
 - [x] Navigate to content items managed from Orchard, rendered within Blazor.
 - [x] Render shapes mapped to components.
 - [x] Consume APIs from custom Orchard Core modules.
-- [] Menu component.
-- [] Shape placement / ordering / alternates.
-- [] Embed within an Orchard Core Theme and initialize the Blazor app without explicitly specifying the host URL.
-- [] Offline mode (initialize Blazor using a JSON export of the site).
+- [ ] Menu component.
+- [ ] Shape placement / ordering / alternates.
+- [ ] Embed within an Orchard Core Theme and initialize the Blazor app without explicitly specifying the host URL.
+- [ ] Offline mode (initialize Blazor using a JSON export of the site).
 
 ## Getting Started
 
