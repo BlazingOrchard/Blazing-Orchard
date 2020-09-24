@@ -1,28 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using BlazingOrchard.Contents.Components;
 using BlazingOrchard.DisplayManagement.Models;
 using BlazingOrchard.DisplayManagement.Services;
 using BlazingOrchard.DisplayManagement.Shapes;
-using BlazingOrchard.Web.Client.Components;
 
-namespace BlazingOrchard.Web.Client
+namespace BlazingOrchard.Contents.Services
 {
-    public class DemoShapeMapProvider : IShapeMapProvider
+    public class ContentShapes : IShapeMapProvider
     {
-        public bool GetSupportsShape(IShape shape) => ((dynamic)shape).ContentItem.ContentType == "Article";
+        public bool GetSupportsShape(IShape shape) => shape.Metadata.Type == "Content";
 
         public ValueTask<ComponentDescriptor> DescribeComponentAsync(IShape shape, CancellationToken cancellationToken = default)
         {
             var descriptor = new ComponentDescriptor
             {
-                ComponentType = typeof(Article),
+                ComponentType = typeof(ContentShape),
                 Attributes = new Dictionary<string, object>
                 {
                     ["Model"] = shape
                 }
             };
-            
             return new ValueTask<ComponentDescriptor>(descriptor);
         }
     }

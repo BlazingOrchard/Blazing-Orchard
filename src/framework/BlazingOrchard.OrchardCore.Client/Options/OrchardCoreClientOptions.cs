@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrchardCore.Client.Options
+namespace BlazingOrchard.OrchardCore.Client.Options
 {
     public class OrchardApiClientOptions
     {

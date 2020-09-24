@@ -10,9 +10,9 @@ namespace BlazingOrchard.Title.Drivers
         {
             return Shape(
                 "TitlePart",
-                context =>
+                async context =>
                 {
-                    var shape = context.New.TitlePart();
+                    dynamic shape = await context.New.TitlePart();
                     shape.ContentItem = contentPart.ContentItem;
                     shape.Title = contentPart.ContentItem.DisplayText;
                     shape.TitlePart = contentPart;

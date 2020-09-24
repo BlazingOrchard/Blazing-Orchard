@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Options;
 using Refit;
 using System;
-using OrchardCore.Client.Options;
-using OrchardCore.Client.Services;
+using BlazingOrchard.OrchardCore.Client.Options;
+using BlazingOrchard.OrchardCore.Client.Services;
 
-namespace OrchardCore.Client.Extensions
+namespace BlazingOrchard.OrchardCore.Client.Extensions
 {
     public static class ServiceCollectionExtensions
     {

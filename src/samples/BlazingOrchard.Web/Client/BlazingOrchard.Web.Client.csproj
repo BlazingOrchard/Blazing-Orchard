@@ -20,8 +20,8 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\framework\BlazingOrchard.Contents.Abstractions\BlazingOrchard.Contents.Abstractions.csproj" />
 	  <ProjectReference Include="..\..\..\framework\BlazingOrchard.DisplayManagement\BlazingOrchard.DisplayManagement.csproj" />
-	  <ProjectReference Include="..\..\..\libraries\OrchardCore.Client\OrchardCore.Client.csproj" />
 	  <ProjectReference Include="..\..\..\modules\BlazingOrchard.Contents\BlazingOrchard.Contents.csproj" />
+	  <ProjectReference Include="..\..\..\modules\BlazingOrchard.Title\BlazingOrchard.Title.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using BlazingOrchard.Contents.Models;
-using OrchardCore.Client.Services;
+using BlazingOrchard.OrchardCore.Client.Services;
 
 namespace BlazingOrchard.Contents.Services
 {

@@ -1,11 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
-using BlazingOrchard.Contents.Display.Services;
-using BlazingOrchard.Contents.Services;
-using BlazingOrchard.DisplayManagement.Services;
 using BlazingOrchard.Extensions;
-using BlazingOrchard.Web.Client.Drivers;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,9 +18,7 @@ namespace BlazingOrchard.Web.Client
 
             services
                 .AddSingleton<IConfiguration>(builder.Configuration)
-                .AddModules(GetModuleAssemblies())
-                .AddSingleton<IContentDisplayDriver, ArticleDriver>()
-                .AddSingleton<IShapeMapProvider, DemoShapeMapProvider>();
+                .AddModules(GetModuleAssemblies());
 
             await builder.Build().RunAsync();
         }
@@ -32,6 +26,7 @@ namespace BlazingOrchard.Web.Client
         private static IEnumerable<Assembly> GetModuleAssemblies()
         {
             yield return typeof(BlazingOrchard.Contents.Startup).Assembly;
+            yield return typeof(BlazingOrchard.Title.Startup).Assembly;
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using BlazingOrchard.Contents.Models;
 using Refit;
 
-namespace OrchardCore.Client.Services
+namespace BlazingOrchard.OrchardCore.Client.Services
 {
     public interface IContentTypeClient
     {

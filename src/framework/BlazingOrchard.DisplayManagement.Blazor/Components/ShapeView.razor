@@ -1,0 +1,40 @@
+﻿@using BlazingOrchard.DisplayManagement.Models
+@using BlazingOrchard.DisplayManagement.Services
+@using BlazingOrchard.DisplayManagement.Shapes
+
+@if (ComponentDescriptor != null)
+{
+    @CreateComponent(ComponentDescriptor)
+}
+
+@code {
+
+    [Parameter]
+    public IShape Shape { get; set; } = default!;
+
+    [Inject]
+    private IEnumerable<IShapeMapProvider> ShapeMapProviders { get; set; } = default!;
+
+    private ComponentDescriptor? ComponentDescriptor { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        ComponentDescriptor = null;
+        var shapeMapProvider = ShapeMapProviders.FirstOrDefault(x => x.GetSupportsShape(Shape));
+
+        if (shapeMapProvider != null)
+            ComponentDescriptor = await shapeMapProvider.DescribeComponentAsync(Shape);
+    }
+    
+    private RenderFragment CreateComponent(ComponentDescriptor descriptor) => builder =>
+    {
+        builder.OpenComponent(0, descriptor.ComponentType);
+        var attributeSequence = 1;
+            
+        foreach (var (key, value) in descriptor.Attributes)
+            builder.AddAttribute(attributeSequence++, key, value);
+
+        builder.CloseComponent();
+    };
+
+}
