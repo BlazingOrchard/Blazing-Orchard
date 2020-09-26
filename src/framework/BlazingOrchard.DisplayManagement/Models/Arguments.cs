@@ -49,7 +49,7 @@ namespace BlazingOrchard.DisplayManagement.Models
             private readonly List<T> _arguments;
             private readonly List<string> _names;
             private readonly T[] _positional;
-            private IDictionary<string, T> _named;
+            private IDictionary<string, T>? _named;
 
             public NamedEnumerable(IEnumerable<T> arguments, IEnumerable<string> names)
             {
@@ -71,13 +71,13 @@ namespace BlazingOrchard.DisplayManagement.Models
             IEnumerator IEnumerable.GetEnumerator() => _arguments.GetEnumerator();
             IEnumerator<T> IEnumerable<T>.GetEnumerator() => _arguments.GetEnumerator();
             IList<T> INamedEnumerable<T>.Positional => _positional;
-            IDictionary<string, T> INamedEnumerable<T>.Named => _named ?? (_named = new Named(_arguments, _names));
+            IDictionary<string, T> INamedEnumerable<T>.Named => _named ??= new Named(_arguments, _names)!;
 
             private class Named : IDictionary<string, T>
             {
                 private readonly IList<T> _arguments;
                 private readonly IList<string> _names;
-                private IEnumerable<KeyValuePair<string, T>> _enumerable;
+                private IEnumerable<KeyValuePair<string, T>>? _enumerable;
 
                 public Named(IList<T> arguments, IList<string> names)
                 {
@@ -90,9 +90,9 @@ namespace BlazingOrchard.DisplayManagement.Models
                 }
 
                 private IEnumerable<KeyValuePair<string, T>> MakeEnumerable() =>
-                    _enumerable ?? (_enumerable = _arguments.Zip(
+                    _enumerable ??= _arguments.Zip(
                         _names,
-                        (arg, name) => new KeyValuePair<string, T>(name, arg)));
+                        (arg, name) => new KeyValuePair<string, T>(name, arg));
 
                 IEnumerator<KeyValuePair<string, T>> IEnumerable<KeyValuePair<string, T>>.GetEnumerator() =>
                     MakeEnumerable().GetEnumerator();

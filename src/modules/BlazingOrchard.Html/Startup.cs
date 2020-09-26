@@ -1,9 +1,7 @@
 ﻿using BlazingOrchard.Contents;
 using BlazingOrchard.Contents.Display.Extensions;
-using BlazingOrchard.DisplayManagement.Extensions;
 using BlazingOrchard.Html.Drivers;
 using BlazingOrchard.Html.Models;
-using BlazingOrchard.Html.Services;
 using BlazingOrchard.Modules;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,8 +13,7 @@ namespace BlazingOrchard.Html
         {
             services
                 .AddContentPart<HtmlBodyPart>()
-                .AddContentPartDisplayDriver<HtmlBodyPartDisplay>()
-                .AddShapeMap<HtmlShapes>();
+                .AddContentPartDisplayDriver<HtmlBodyPartDisplay>();
         }
     }
 }

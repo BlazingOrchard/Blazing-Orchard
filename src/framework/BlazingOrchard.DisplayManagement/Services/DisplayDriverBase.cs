@@ -6,7 +6,7 @@ namespace BlazingOrchard.DisplayManagement.Services
 {
     public abstract class DisplayDriverBase
     {
-        protected ShapeResult Shape(string shapeType, Func<IBuildShapeContext, ValueTask<IShape>> shapeBuilder) =>
+        protected ShapeResult Shape(string shapeType, Func<IBuildShapeContext, ValueTask<IShape?>> shapeBuilder) =>
             new ShapeResult(shapeType, shapeBuilder);
     }
 }

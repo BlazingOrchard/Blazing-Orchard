@@ -9,15 +9,16 @@ namespace BlazingOrchard.ContentFields.Drivers
         protected override IDisplayResult? BuildDisplay(TextField contentField)
         {
             return Shape(
-                "TextField",
-                async context =>
-                {
-                    var shape = await context.New.TextField();
-                    shape.ContentItem = contentField.ContentItem;
-                    shape.Text = contentField.Text!;
-                    shape.TextField = contentField;
-                    return shape;
-                });
+                    "TextField",
+                    async context =>
+                    {
+                        var shape = await context.New.TextField();
+                        shape.ContentItem = contentField.ContentItem;
+                        shape.Text = contentField.Text!;
+                        shape.TextField = contentField;
+                        return shape;
+                    })
+                .DefaultLocation("3");
         }
     }
 }

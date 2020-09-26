@@ -22,6 +22,7 @@ namespace BlazingOrchard.Web.Server
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddBlazingOrchard();
             services.AddModules(Application.Modules.GetAssemblies());
         }
 

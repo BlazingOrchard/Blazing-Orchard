@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Reflection;
 using System.Threading.Tasks;
 using BlazingOrchard.Extensions;
 using BlazingOrchard.Web.Application;
@@ -19,6 +17,7 @@ namespace BlazingOrchard.Web.Client
 
             services
                 .AddSingleton<IConfiguration>(builder.Configuration)
+                .AddBlazingOrchard()
                 .AddModules(Application.Modules.GetAssemblies());
 
             await builder.Build().RunAsync();

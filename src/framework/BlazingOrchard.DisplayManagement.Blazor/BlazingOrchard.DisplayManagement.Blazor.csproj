@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\BlazingOrchard.Abstractions\BlazingOrchard.Abstractions.csproj" />
       <ProjectReference Include="..\BlazingOrchard.DisplayManagement\BlazingOrchard.DisplayManagement.csproj" />
     </ItemGroup>
 

@@ -1,4 +1,5 @@
-﻿using BlazingOrchard.DisplayManagement.Services;
+﻿using BlazingOrchard.DisplayManagement.Descriptors;
+using BlazingOrchard.DisplayManagement.Services;
 using BlazingOrchard.DisplayManagement.Shapes;
 
 namespace BlazingOrchard.DisplayManagement.Models
@@ -9,10 +10,20 @@ namespace BlazingOrchard.DisplayManagement.Models
         {
             Shape = shape;
             ShapeFactory = shapeFactory;
+            FindPlacement = FindDefaultPlacement;
         }
 
         public IShape Shape { get; private set; }
         public IShapeFactory ShapeFactory { get; private set; }
         public dynamic New => ShapeFactory;
+        public FindPlacementDelegate FindPlacement { get; set; }
+        public string? DefaultZone { get; set; }
+        public string? DefaultPosition { get; set; }
+
+        private PlacementInfo? FindDefaultPlacement(
+            string shapeType,
+            string? differentiator,
+            string? displayType,
+            IBuildShapeContext context) => default;
     }
 }

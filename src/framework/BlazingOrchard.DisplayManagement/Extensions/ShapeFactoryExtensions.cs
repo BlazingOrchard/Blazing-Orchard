@@ -13,7 +13,7 @@ namespace BlazingOrchard.DisplayManagement.Extensions
             string shapeType,
             INamedEnumerable<T> parameters)
         {
-            if (parameters == null || parameters == Arguments.Empty)
+            if (parameters == null! || parameters == Arguments.Empty)
                 return await factory.CreateAsync(shapeType);
 
             var shape = (Shape)await factory.CreateAsync(shapeType);
@@ -30,8 +30,8 @@ namespace BlazingOrchard.DisplayManagement.Extensions
             }
             else
             {
-                foreach (var kv in parameters.Named) 
-                    shape.Properties[kv.Key] = kv.Value;
+                foreach (var (key, value) in parameters.Named) 
+                    shape.Properties[key] = value!;
             }
 
             return shape;

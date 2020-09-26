@@ -4,5 +4,6 @@
     {
         public string Name { get; set; } = default!;
         public ContentFieldDescriptor Field { get; set; } = default!;
+        public ContentPartFieldSettings Settings { get; set; } = default!;
     }
 }

@@ -9,15 +9,16 @@ namespace BlazingOrchard.Title.Drivers
         protected override IDisplayResult? BuildDisplay(TitlePart contentPart)
         {
             return Shape(
-                "TitlePart",
-                async context =>
-                {
-                    dynamic shape = await context.New.TitlePart();
-                    shape.ContentItem = contentPart.ContentItem;
-                    shape.Title = contentPart.ContentItem.DisplayText;
-                    shape.TitlePart = contentPart;
-                    return shape;
-                });
+                    "TitlePart",
+                    async context =>
+                    {
+                        dynamic shape = await context.New.TitlePart();
+                        shape.ContentItem = contentPart.ContentItem;
+                        shape.Title = contentPart.ContentItem.DisplayText;
+                        shape.TitlePart = contentPart;
+                        return shape;
+                    })
+                .DefaultLocation("1");
         }
     }
 }

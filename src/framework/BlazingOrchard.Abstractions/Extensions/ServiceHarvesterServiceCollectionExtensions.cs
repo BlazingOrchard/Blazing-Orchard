@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazingOrchard.Extensions
 {
-    public static class ServiceHarvester
+    public static class ServiceHarvesterServiceCollectionExtensions
     {
         public static IServiceCollection AddServices<T>(
             this IServiceCollection services,

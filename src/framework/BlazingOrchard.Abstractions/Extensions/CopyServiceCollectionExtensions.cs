@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace BlazingOrchard.Extensions
 {
-    public static class ServiceCollectionExtensions
+    public static class CopyServiceCollectionExtensions
     {
         public static IServiceCollection Copy(this IServiceCollection services)
         {

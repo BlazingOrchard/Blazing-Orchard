@@ -6,7 +6,6 @@ using BlazingOrchard.Modules;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BlazingOrchard.OrchardCore.Client.Extensions;
-using BlazingOrchard.DisplayManagement.Extensions;
 
 namespace BlazingOrchard.Contents
 {
@@ -27,8 +26,7 @@ namespace BlazingOrchard.Contents
                 .AddSingleton<IContentTypeProvider, OrchardApiContentTypeProvider>()
                 .AddSingleton<IShapeFactory, ShapeFactory>()
                 .AddSingleton<IContentDisplayManager, ContentDisplayManager>()
-                .AddSingleton<IContentDisplayHandler, ContentItemDisplayDriverCoordinator>()
-                .AddShapeMap<ContentShapes>();
+                .AddSingleton<IContentDisplayHandler, ContentItemDisplayDriverCoordinator>();
         }
     }
 }

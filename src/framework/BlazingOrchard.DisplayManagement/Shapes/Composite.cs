@@ -16,7 +16,7 @@ namespace BlazingOrchard.DisplayManagement.Shapes
             if (Properties.TryGetValue(name, out result))
                 return true;
 
-            result = null;
+            result = null!;
             return true;
         }
 
@@ -62,12 +62,12 @@ namespace BlazingOrchard.DisplayManagement.Shapes
                     return true;
 
                 // Returning false results in a RuntimeBinderException if the index supplied is not an existing string property name.
-                result = null;
+                result = null!;
                 return false;
             }
 
             // Returning false results in a RuntimeBinderException if the index supplied is not an existing string property name.
-            result = null;
+            result = null!;
             return false;
         }
 
@@ -87,13 +87,13 @@ namespace BlazingOrchard.DisplayManagement.Shapes
             return false;
         }
 
-        public static bool operator ==(Composite a, Nil b) => null == a;
+        public static bool operator ==(Composite a, Nil b) => null! == a;
         public static bool operator !=(Composite a, Nil b) => !(a == b);
-        public override int GetHashCode() => (Properties != null ? Properties.GetHashCode() : 0);
+        public override int GetHashCode() => (Properties != null! ? Properties.GetHashCode() : 0);
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (ReferenceEquals(null!, obj))
                 return false;
             if (ReferenceEquals(this, obj))
                 return true;

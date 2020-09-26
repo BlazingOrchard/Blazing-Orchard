@@ -1,27 +1,62 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using BlazingOrchard.DisplayManagement.Zones;
 
 namespace BlazingOrchard.DisplayManagement.Shapes
 {
-    public class Shape : Composite, IShape
+    public class Shape : Composite, IShape, IPositioned, IEnumerable<object>
     {
-        private List<Shape> _items = new List<Shape>();
         public ShapeMetadata Metadata { get; set; } = new ShapeMetadata();
-        public IEnumerable<dynamic> Items => _items;
+        public string Position { get; set; }
         public bool HasItems => _items.Count > 0;
+        private List<IPositioned> _items = new List<IPositioned>();
+        private bool _sorted;
 
-        public virtual Shape Add(object item)
+        public IEnumerable<dynamic> Items
         {
-            var shape = item as Shape;
-            
-            if (shape != null) 
-                _items.Add(shape);
+            get
+            {
+                if (!_sorted)
+                {
+                    _items = _items.OrderBy(x => x, FlatPositionComparer.Instance).ToList();
+                    _sorted = true;
+                }
+
+                return _items;
+            }
+        }
+
+        public virtual Shape Add(object? item, string? position = default)
+        {
+            if (item == null)
+                return this;
+
+            if (position == null)
+                position = "";
+
+            _sorted = false;
+
+            if (item is string s)
+            {
+                _items.Add(new PositionWrapper(s, position));
+            }
+            else
+            {
+                if (item is IPositioned shape)
+                {
+                    shape.Position = position;
+                    _items.Add(shape);
+                }
+            }
 
             return this;
         }
 
-        public Shape AddRange(IEnumerable<object> items)
+        public Shape AddRange(IEnumerable<object> items, string? position = default)
         {
-            foreach (var item in items) Add(item);
+            foreach (var item in items) 
+                Add(item, position);
 
             return this;
         }
@@ -36,6 +71,28 @@ namespace BlazingOrchard.DisplayManagement.Shapes
                     return;
                 }
             }
+        }
+        
+        IEnumerator<object> IEnumerable<object>.GetEnumerator()
+        {
+            if (!_sorted)
+            {
+                _items = _items.OrderBy(x => x, FlatPositionComparer.Instance).ToList();
+                _sorted = true;
+            }
+
+            return _items.GetEnumerator();
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            if (!_sorted)
+            {
+                _items = _items.OrderBy(x => x, FlatPositionComparer.Instance).ToList();
+                _sorted = true;
+            }
+
+            return _items.GetEnumerator();
         }
     }
 }

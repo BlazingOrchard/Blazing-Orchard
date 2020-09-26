@@ -76,7 +76,10 @@ namespace BlazingOrchard.Contents.Handlers
                 return;
 
             var drivers = _contentPartDisplayDrivers.Where(x => x.PartType == partType);
-            var partDisplayContext = new BuildPartDisplayContext(contentTypePartDescriptor, context);
+            var partDisplayContext = new BuildPartDisplayContext(contentTypePartDescriptor, context)
+            {
+                DefaultPosition = contentTypePartDescriptor.Settings.Position
+            };
 
             foreach (var driver in drivers)
             {
@@ -120,7 +123,10 @@ namespace BlazingOrchard.Contents.Handlers
                 return;
 
             var drivers = _contentFieldDisplayDrivers.Where(x => x.FieldType == fieldType);
-            var fieldDisplayContext = new BuildFieldDisplayContext(contentTypePartDescriptor, contentPartFieldDescriptor, context);
+            var fieldDisplayContext = new BuildFieldDisplayContext(contentTypePartDescriptor, contentPartFieldDescriptor, context)
+            {
+                DefaultPosition = contentPartFieldDescriptor.Settings.Position
+            };
 
             foreach (var driver in drivers)
             {
