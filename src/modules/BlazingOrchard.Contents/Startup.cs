@@ -1,8 +1,6 @@
 ﻿using BlazingOrchard.Contents.Display.Services;
 using BlazingOrchard.Contents.Handlers;
 using BlazingOrchard.Contents.Services;
-using BlazingOrchard.Contents.Shapes;
-using BlazingOrchard.DisplayManagement.Services;
 using BlazingOrchard.Modules;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,8 +24,7 @@ namespace BlazingOrchard.Contents
                 .AddSingleton<IContentProvider, OrchardApiContentProvider>()
                 .AddSingleton<IContentTypeProvider, OrchardApiContentTypeProvider>()
                 .AddSingleton<IContentDisplayManager, ContentDisplayManager>()
-                .AddSingleton<IContentDisplayHandler, ContentItemDisplayDriverCoordinator>()
-                .AddSingleton<IShapeTableProvider, AliasShapeTableProvider>();
+                .AddSingleton<IContentDisplayHandler, ContentItemDisplayDriverCoordinator>();
         }
     }
 }

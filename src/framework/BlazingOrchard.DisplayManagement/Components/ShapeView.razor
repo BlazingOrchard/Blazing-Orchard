@@ -13,7 +13,7 @@
     
     private RenderFragment RenderFragment { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         RenderFragment = await ShapeRenderer.RenderShapeAsync(Shape);
     }

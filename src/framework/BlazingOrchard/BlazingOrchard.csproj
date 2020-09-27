@@ -10,6 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\modules\BlazingOrchard.Alias\BlazingOrchard.Alias.csproj" />
       <ProjectReference Include="..\..\modules\BlazingOrchard.ContentFields\BlazingOrchard.ContentFields.csproj" />
       <ProjectReference Include="..\..\modules\BlazingOrchard.Contents\BlazingOrchard.Contents.csproj" />
       <ProjectReference Include="..\..\modules\BlazingOrchard.Html\BlazingOrchard.Html.csproj" />

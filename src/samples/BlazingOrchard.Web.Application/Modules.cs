@@ -7,6 +7,7 @@ namespace BlazingOrchard.Web.Application
     {
         public static IEnumerable<Assembly> GetAssemblies()
         {
+            yield return typeof(BlazingOrchard.Alias.Startup).Assembly;
             yield return typeof(BlazingOrchard.Contents.Startup).Assembly;
             yield return typeof(BlazingOrchard.Title.Startup).Assembly;
             yield return typeof(BlazingOrchard.Html.Startup).Assembly;
