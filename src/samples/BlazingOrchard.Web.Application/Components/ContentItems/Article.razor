@@ -1,9 +1,10 @@
 ﻿@inherits ShapeTemplate
 @attribute [Shape("Content__Article")]
-<h3>Article Template Override</h3>
+<h3>@Model.ContentItem.DisplayText</h3>
+<small>(This is a shape override for Content-Article)</small>
 
-<p>@Model.ContentItem.DisplayText</p>
+@Html
 
 @code {
-
+    private MarkupString Html => (MarkupString)(string)Model.ContentItem.Content.HtmlBodyPart.Html;
 }

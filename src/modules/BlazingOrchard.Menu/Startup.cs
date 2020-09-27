@@ -13,6 +13,8 @@ namespace BlazingOrchard.Menu
         {
             services
                 .AddContentPart<MenuItemsListPart>()
+                .AddContentPart<LinkMenuItemPart>()
+                .AddContentPart<ContentMenuItemPart>()
                 .AddContentPartDisplayDriver<MenuItemsListPartDisplay>();
         }
     }
