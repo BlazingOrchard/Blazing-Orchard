@@ -13,8 +13,8 @@ namespace BlazingOrchard.DisplayManagement.Models
             FindPlacement = FindDefaultPlacement;
         }
 
-        public IShape Shape { get; private set; }
-        public IShapeFactory ShapeFactory { get; private set; }
+        public IShape Shape { get; }
+        public IShapeFactory ShapeFactory { get; }
         public dynamic New => ShapeFactory;
         public FindPlacementDelegate FindPlacement { get; set; }
         public string? DefaultZone { get; set; }

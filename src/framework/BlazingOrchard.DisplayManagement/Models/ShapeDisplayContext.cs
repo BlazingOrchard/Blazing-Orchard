@@ -5,7 +5,7 @@ namespace BlazingOrchard.DisplayManagement.Models
 {
     public class ShapeDisplayContext
     {
-        public IShape Shape { get; set; }
-        public IServiceProvider ServiceProvider { get; set; }
+        public IShape Shape { get; set; } = default!;
+        public IServiceProvider ServiceProvider { get; set; } = default!;
     }
 }

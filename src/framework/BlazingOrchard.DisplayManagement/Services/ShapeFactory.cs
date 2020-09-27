@@ -42,14 +42,12 @@ namespace BlazingOrchard.DisplayManagement.Services
             }
 
             // Create the new instance.
-            var createdContext = new ShapeCreatedContext
-            {
-                ServiceProvider = _serviceProvider,
-                New = creatingContext.New,
-                ShapeFactory = creatingContext.ShapeFactory,
-                ShapeType = creatingContext.ShapeType,
-                Shape = await creatingContext.CreateAsync()
-            };
+            var createdContext = new ShapeCreatedContext(
+                _serviceProvider,
+                creatingContext.New,
+                creatingContext.ShapeFactory,
+                creatingContext.ShapeType,
+                await creatingContext.CreateAsync());
 
             var shape = createdContext.Shape;
 

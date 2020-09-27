@@ -13,14 +13,12 @@ namespace BlazingOrchard.DisplayManagement.Models
             ShapeType = shapeType;
         }
 
-        public string ShapeType { get; private set; }
+        public string ShapeType { get; }
 
         public void Alter(ShapeDescriptor descriptor)
         {
-            foreach (var configuration in _configurations)
-            {
+            foreach (var configuration in _configurations) 
                 configuration(descriptor);
-            }
         }
     }
 }

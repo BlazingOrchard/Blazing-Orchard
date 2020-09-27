@@ -1,6 +1,6 @@
 ﻿using BlazingOrchard.DisplayManagement.Shapes;
 
-namespace BlazingOrchard.DisplayManagement.Services
+namespace BlazingOrchard.DisplayManagement.Models
 {
     public class ShapePlacementContext
     {
@@ -21,6 +21,6 @@ namespace BlazingOrchard.DisplayManagement.Services
         /// Debug information explaining where the final placement is coming from.
         /// Used by tooling.
         /// </summary>
-        public string Source { get; set; }
+        public string? Source { get; set; }
     }
 }

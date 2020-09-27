@@ -1,4 +1,4 @@
-﻿namespace BlazingOrchard.DisplayManagement.Blazor.Components
+﻿namespace BlazingOrchard.DisplayManagement.Components
 {
     public class Placeholder
     {
