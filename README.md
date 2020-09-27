@@ -19,15 +19,18 @@ With Blazing Orchard, you build your SPA application as you normally would, but 
 - [ ] Embed within an Orchard Core Theme and initialize the Blazor app without explicitly specifying the host URL.
 - [ ] Offline mode (initialize Blazor using a JSON export of the site).
 
-### Parts & Fields
+### Parts
 - [x] HtmlBodyPart
-- [x] TextField
-- [ ] MarkdownPart
+- [x] MarkdownPart
 - [ ] LiquidPart
 - [ ] FlowPart
 - [ ] BagPart
 - [ ] ListPart
 - [ ] TaxonomyPart
+
+### Fields
+- [x] TextField
+- [x] MarkdownField
 - [ ] MediaField
 - [ ] TaxonomyField
 
