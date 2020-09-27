@@ -9,6 +9,7 @@ namespace BlazingOrchard.DisplayManagement.Extensions
         {
             return services
                 .AddSingleton<IComponentTypeProvider, ComponentTypeProvider>()
+                .AddSingleton<IShapeFactory, ShapeFactory>()
                 .AddSingleton<IShapeTableManager, ShapeTableManager>()
                 .AddSingleton<IShapeRenderer, ShapeRenderer>();
         }

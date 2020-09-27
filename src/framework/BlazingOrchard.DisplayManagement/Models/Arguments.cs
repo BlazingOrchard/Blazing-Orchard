@@ -15,8 +15,8 @@ namespace BlazingOrchard.DisplayManagement.Models
         public static INamedEnumerable<T> FromT<T>(IEnumerable<T> arguments, IEnumerable<string> names) =>
             new NamedEnumerable<T>(arguments, names);
 
-        public static INamedEnumerable<object> From(IEnumerable<object> arguments, IEnumerable<string> names) =>
-            new NamedEnumerable<object>(arguments, names);
+        public static INamedEnumerable<object> From(IEnumerable<object?>? arguments, IEnumerable<string> names) =>
+            arguments != null ? new NamedEnumerable<object>(arguments, names) : Empty;
 
         public static INamedEnumerable<object> From(IDictionary<string, object> dictionary) =>
             From(dictionary.Values, dictionary.Keys);

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Threading.Tasks;
 using BlazingOrchard.DisplayManagement.Extensions;
 using BlazingOrchard.DisplayManagement.Models;
@@ -9,15 +11,69 @@ namespace BlazingOrchard.DisplayManagement.Services
 {
     public class ShapeFactory : DynamicObject, IShapeFactory
     {
-        public ValueTask<IShape> CreateAsync(string shapeType)
+        private readonly IShapeTableManager _shapeTableManager;
+        private readonly IServiceProvider _serviceProvider;
+
+        public ShapeFactory(IShapeTableManager shapeTableManager, IServiceProvider serviceProvider)
         {
-            var shape = new Shape { Metadata = { Type = shapeType } };
-            return new ValueTask<IShape>(shape);
+            _shapeTableManager = shapeTableManager;
+            _serviceProvider = serviceProvider;
         }
-        
+
+        public async ValueTask<IShape> CreateAsync(string shapeType, Func<ValueTask<IShape>> shapeFactory)
+        {
+            var shapeTable = _shapeTableManager.GetShapeTable();
+            var descriptors = shapeTable.Descriptors;
+
+            var creatingContext = new ShapeCreatingContext
+            {
+                ServiceProvider = _serviceProvider,
+                New = this,
+                ShapeFactory = this,
+                ShapeType = shapeType,
+                OnCreated = new List<Func<ShapeCreatedContext, Task>>(),
+                CreateAsync = shapeFactory
+            };
+
+            if (descriptors.TryGetValue(shapeType, out var shapeDescriptor))
+            {
+                // "Creating" events may add behaviors and alter base type.
+                foreach (var ev in shapeDescriptor.CreatingAsync)
+                    await ev(creatingContext);
+            }
+
+            // Create the new instance.
+            var createdContext = new ShapeCreatedContext
+            {
+                ServiceProvider = _serviceProvider,
+                New = creatingContext.New,
+                ShapeFactory = creatingContext.ShapeFactory,
+                ShapeType = creatingContext.ShapeType,
+                Shape = await creatingContext.CreateAsync()
+            };
+
+            var shape = createdContext.Shape;
+
+            if (shape == null)
+                throw new InvalidOperationException(
+                    $"Invalid base type for shape: {createdContext.Shape.GetType()}");
+
+            var shapeMetadata = shape.Metadata;
+            shapeMetadata.Type = shapeType;
+
+            if (shapeDescriptor != null)
+                foreach (var ev in shapeDescriptor.CreatedAsync)
+                    await ev(createdContext);
+
+            foreach (var ev in creatingContext.OnCreated)
+                await ev(createdContext);
+
+            return shape;
+        }
+
         public dynamic New => this;
 
-        public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
+        public override bool TryInvokeMember(InvokeMemberBinder binder, object?[]? args, out object result)
         {
             // await New.FooAsync()
             // await New.Foo()

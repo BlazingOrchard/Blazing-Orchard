@@ -1,10 +1,12 @@
-﻿using BlazingOrchard.DisplayManagement.Shapes;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using BlazingOrchard.DisplayManagement.Shapes;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazingOrchard.DisplayManagement.Services
 {
     public interface IShapeRenderer
     {
-        RenderFragment RenderShape(IShape shape);
+        Task<RenderFragment> RenderShapeAsync(IShape shape, CancellationToken cancellationToken = default);
     }
 }

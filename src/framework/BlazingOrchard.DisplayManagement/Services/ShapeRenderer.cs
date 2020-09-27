@@ -1,29 +1,59 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using BlazingOrchard.DisplayManagement.Models;
 using BlazingOrchard.DisplayManagement.Shapes;
+using BlazingOrchard.Extensions;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
 
 namespace BlazingOrchard.DisplayManagement.Services
 {
     public class ShapeRenderer : IShapeRenderer
     {
         private readonly IShapeTableManager _shapeTableManager;
+        private readonly IServiceProvider _serviceProvider;
+        private ILogger _logger;
 
-        public ShapeRenderer(IShapeTableManager shapeTableManager)
+        public ShapeRenderer(IShapeTableManager shapeTableManager,
+            IServiceProvider serviceProvider,
+            ILogger<ShapeRenderer> logger)
         {
             _shapeTableManager = shapeTableManager;
+            _serviceProvider = serviceProvider;
+            _logger = logger;
         }
 
-        public RenderFragment RenderShape(IShape shape)
+        public async Task<RenderFragment> RenderShapeAsync(IShape shape, CancellationToken cancellationToken)
         {
-            var componentType = GetComponentType(shape);
+            var componentType = await GetComponentTypeAsync(shape);
             return RenderComponent(componentType, shape);
         }
 
-        private Type GetComponentType(IShape shape)
+        private async Task<Type> GetComponentTypeAsync(IShape shape)
         {
             var shapeTable = _shapeTableManager.GetShapeTable();
-            var shapeTypes = shape.Metadata.Alternates.Reverse().Concat(new[] { shape.Metadata.Type }).ToList();
+            var shapeMetadata = shape.Metadata;
+
+            var displayContext = new ShapeDisplayContext
+            {
+                Shape = shape,
+                ServiceProvider = _serviceProvider
+            };
+
+            if (shapeTable.Descriptors.TryGetValue(shapeMetadata.Type, out var shapeDescriptor))
+            {
+                await shapeDescriptor.DisplayingAsync.InvokeAsync(
+                    (action, displayContext) => action(displayContext),
+                    displayContext,
+                    _logger);
+            }
+
+            // Invoking ShapeMetadata displaying events.
+            shapeMetadata.Displaying.Invoke(action => action(displayContext), _logger);
+
+            var shapeTypes = shapeMetadata.Alternates.Reverse().Concat(new[] { shape.Metadata.Type }).ToList();
 
             var query =
                 from shapeType in shapeTypes
@@ -35,6 +65,17 @@ namespace BlazingOrchard.DisplayManagement.Services
 
             if (binding == null)
                 throw new Exception($"No component binding found for shape {shape.Metadata.Type}.");
+
+            if (shapeDescriptor != null)
+            {
+                await shapeDescriptor.DisplayedAsync.InvokeAsync(
+                    (action, displayContext) => action(displayContext),
+                    displayContext,
+                    _logger);
+            }
+
+            // Invoking ShapeMetadata displayed events.
+            shapeMetadata.Displayed.Invoke((action, displayContext) => action(displayContext), displayContext, _logger);
 
             return binding.ComponentType;
         }

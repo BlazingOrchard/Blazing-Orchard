@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BlazingOrchard.Contents.Display.Services;
 using BlazingOrchard.Contents.Models;
+using BlazingOrchard.DisplayManagement.Extensions;
 using BlazingOrchard.DisplayManagement.Models;
 using BlazingOrchard.DisplayManagement.Services;
 using BlazingOrchard.DisplayManagement.Shapes;

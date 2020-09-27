@@ -1,7 +1,7 @@
 ﻿@using BlazingOrchard.DisplayManagement.Services
 @using BlazingOrchard.DisplayManagement.Shapes
 
-@ShapeRenderer.RenderShape(Shape)
+@RenderFragment
 
 @code {
 
@@ -10,5 +10,12 @@
 
     [Inject]
     private IShapeRenderer ShapeRenderer { get; set; } = default!;
+    
+    private RenderFragment RenderFragment { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        RenderFragment = await ShapeRenderer.RenderShapeAsync(Shape);
+    }
 
 }
