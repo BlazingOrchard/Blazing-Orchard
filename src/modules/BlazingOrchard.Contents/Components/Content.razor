@@ -1,13 +1,9 @@
-﻿
+﻿@inherits ShapeTemplate
 @foreach (var item in Items)
 {
-    <ShapeView Shape="item" />
+    <ShapeView Shape="item"/>
 }
 
 @code {
-
-    [Parameter]
-    public Shape Model { get; set; } = default!;
-
     IEnumerable<dynamic> Items => Model.Items;
 }

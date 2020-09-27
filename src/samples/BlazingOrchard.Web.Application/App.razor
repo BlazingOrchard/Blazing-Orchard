@@ -11,5 +11,5 @@
 </Router>
 
 @code {
-    private ICollection<Assembly> ModuleAssemblies => Modules.GetAssemblies().ToList();
+    private ICollection<Assembly> ModuleAssemblies => Modules.GetAssemblies().Where(x => x != typeof(Modules).Assembly).ToList();
 }

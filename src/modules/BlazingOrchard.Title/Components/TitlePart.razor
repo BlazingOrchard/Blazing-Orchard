@@ -1,9 +1,6 @@
-﻿<h1>@Title</h1>
+﻿@inherits ShapeTemplate
+<h1>@Title</h1>
 
 @code {
-
-    [Parameter]
-    public dynamic Model { get; set; } = default!;
-    
     private string Title => Model.Title;
 }

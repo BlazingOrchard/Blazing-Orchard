@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BlazingOrchard.DisplayManagement.Blazor.Services
+namespace BlazingOrchard.DisplayManagement.Services
 {
     public interface IComponentTypeProvider
     {

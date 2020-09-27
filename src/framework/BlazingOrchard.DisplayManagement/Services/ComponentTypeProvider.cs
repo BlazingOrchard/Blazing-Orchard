@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazingOrchard.DisplayManagement.Blazor.Services
+namespace BlazingOrchard.DisplayManagement.Services
 {
     public class ComponentTypeProvider : IComponentTypeProvider
     {

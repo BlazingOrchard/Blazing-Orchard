@@ -7,5 +7,6 @@
         public string? Name { get; set; }
         public string? Differentiator { get; set; }
         public string? PlacementSource { get; set; }
+        public AlternatesCollection Alternates { get; set; } = new AlternatesCollection();
     }
 }

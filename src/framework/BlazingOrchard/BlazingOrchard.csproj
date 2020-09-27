@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
@@ -18,7 +18,6 @@
       <ProjectReference Include="..\BlazingOrchard.Abstractions\BlazingOrchard.Abstractions.csproj" />
       <ProjectReference Include="..\BlazingOrchard.Contents.Abstractions\BlazingOrchard.Contents.Abstractions.csproj" />
       <ProjectReference Include="..\BlazingOrchard.Contents.Display\BlazingOrchard.Contents.Display.csproj" />
-      <ProjectReference Include="..\BlazingOrchard.DisplayManagement.Blazor\BlazingOrchard.DisplayManagement.Blazor.csproj" />
       <ProjectReference Include="..\BlazingOrchard.DisplayManagement\BlazingOrchard.DisplayManagement.csproj" />
       <ProjectReference Include="..\BlazingOrchard.OrchardCore.Client\BlazingOrchard.OrchardCore.Client.csproj" />
     </ItemGroup>

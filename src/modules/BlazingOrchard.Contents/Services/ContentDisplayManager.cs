@@ -30,6 +30,7 @@ namespace BlazingOrchard.Contents.Services
 
             ShapeMetadata metadata = itemShape.Metadata;
             metadata.DisplayType = actualDisplayType;
+            metadata.Alternates.Add($"Content__{contentItem.ContentType}");
             
             var context = new BuildDisplayContext(
                 itemShape,

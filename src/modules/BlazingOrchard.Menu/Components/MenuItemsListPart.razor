@@ -1,6 +1,4 @@
-﻿@using BlazingOrchard.Contents.Models
-@using BlazingOrchard.Contents
-@using BlazingOrchard.Menu.Models
+﻿@inherits ShapeTemplate
 
 @if (MenuItems != null && MenuItems.Any())
 {
@@ -16,9 +14,6 @@
 }
 
 @code {
-
-    [Parameter]
-    public dynamic Model { get; set; } = default!;
 
     private ICollection<ContentItem> MenuItems => Model.MenuItems;
 

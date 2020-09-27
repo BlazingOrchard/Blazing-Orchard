@@ -1,4 +1,4 @@
-﻿using BlazingOrchard.DisplayManagement.Blazor.Extensions;
+﻿using BlazingOrchard.DisplayManagement.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazingOrchard
@@ -7,7 +7,7 @@ namespace BlazingOrchard
     {
         public static IServiceCollection AddBlazingOrchard(this IServiceCollection services)
         {
-            return services.AddBlazorDisplayManagement();
+            return services.AddDisplayManagement();
         }
     }
 }

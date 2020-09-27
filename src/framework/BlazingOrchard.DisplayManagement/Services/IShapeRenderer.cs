@@ -1,7 +1,7 @@
 ﻿using BlazingOrchard.DisplayManagement.Shapes;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazingOrchard.DisplayManagement.Blazor.Services
+namespace BlazingOrchard.DisplayManagement.Services
 {
     public interface IShapeRenderer
     {

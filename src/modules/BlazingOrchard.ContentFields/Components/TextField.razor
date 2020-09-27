@@ -1,7 +1,7 @@
-﻿@Text
+﻿@inherits ShapeTemplate
+@Text
 
 @code
 {
-    [Parameter] public dynamic Model { get; set; } = default!;
     private string Text => Model.Text;
 }

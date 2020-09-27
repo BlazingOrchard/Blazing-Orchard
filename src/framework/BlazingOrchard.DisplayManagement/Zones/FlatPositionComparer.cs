@@ -13,7 +13,7 @@ namespace BlazingOrchard.DisplayManagement.Zones
         {
         }
 
-        public int Compare(IPositioned a, IPositioned b)
+        public int Compare(IPositioned? a, IPositioned? b)
         {
             var x = a.Position;
             var y = b.Position;
