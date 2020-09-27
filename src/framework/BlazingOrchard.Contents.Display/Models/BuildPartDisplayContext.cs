@@ -6,10 +6,10 @@ namespace BlazingOrchard.Contents.Display.Models
     public class BuildPartDisplayContext : BuildDisplayContext
     {
         public BuildPartDisplayContext(
-            ContentTypePartDescriptor typePartDescriptor,
+            ContentTypePartDefinition typePartDefinition,
             BuildDisplayContext context) : base(context) =>
-            TypePartDescriptor = typePartDescriptor;
+            TypePartDefinition = typePartDefinition;
 
-        public ContentTypePartDescriptor TypePartDescriptor { get; }
+        public ContentTypePartDefinition TypePartDefinition { get; }
     }
 }

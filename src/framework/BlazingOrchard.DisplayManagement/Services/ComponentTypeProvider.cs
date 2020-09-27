@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BlazingOrchard.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazingOrchard.DisplayManagement.Services

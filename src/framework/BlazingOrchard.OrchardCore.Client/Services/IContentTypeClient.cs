@@ -8,6 +8,6 @@ namespace BlazingOrchard.OrchardCore.Client.Services
     public interface IContentTypeClient
     {
         [Get("/api/content-types/{contentTypeName}")]
-        Task<ContentTypeDescriptor> GetByNameAsync(string contentTypeName, CancellationToken cancellationToken = default);
+        Task<ContentTypeDefinition> GetByNameAsync(string contentTypeName, CancellationToken cancellationToken = default);
     }
 }

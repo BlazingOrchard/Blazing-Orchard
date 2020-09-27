@@ -9,12 +9,12 @@ namespace BlazingOrchard.Html.Drivers
         protected override IDisplayResult? BuildDisplay(HtmlBodyPart contentPart)
         {
             return Shape(
-                    "HtmlBodyPart",
+                    nameof(HtmlBodyPart),
                     async context =>
                     {
                         var shape = await context.New.HtmlBodyPart();
                         shape.ContentItem = contentPart.ContentItem;
-                        shape.Html = contentPart.Html;
+                        shape.Html = contentPart.Html!;
                         shape.HtmlBodyPart = contentPart;
                         return shape;
                     })

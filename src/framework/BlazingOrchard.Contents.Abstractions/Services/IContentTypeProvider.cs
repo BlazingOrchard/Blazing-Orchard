@@ -6,6 +6,6 @@ namespace BlazingOrchard.Contents.Services
 {
     public interface IContentTypeProvider
     {
-        Task<ContentTypeDescriptor> GetAsync(string contentType, CancellationToken cancellationToken = default);
+        Task<ContentTypeDefinition> GetAsync(string contentType, CancellationToken cancellationToken = default);
     }
 }

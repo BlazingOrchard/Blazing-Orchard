@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace BlazingOrchard
+namespace BlazingOrchard.Services
 {
     public class ModuleRegistry : IModuleRegistry
     {

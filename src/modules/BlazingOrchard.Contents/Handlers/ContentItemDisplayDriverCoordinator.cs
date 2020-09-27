@@ -53,21 +53,22 @@ namespace BlazingOrchard.Contents.Handlers
 
         private async Task BuildContentPartsDisplaysAsync(
             ContentItem contentItem,
-            ContentTypeDescriptor contentTypeDescriptor,
+            ContentTypeDefinition contentTypeDefinition,
             BuildDisplayContext context)
         {
-            foreach (var contentTypePartDescriptor in contentTypeDescriptor.Parts)
+            foreach (var contentTypePartDescriptor in contentTypeDefinition.Parts)
                 await BuildContentPartDisplaysAsync(contentItem, contentTypePartDescriptor, context);
         }
 
         private async Task BuildContentPartDisplaysAsync(
             ContentItem contentItem,
-            ContentTypePartDescriptor contentTypePartDescriptor,
+            ContentTypePartDefinition contentTypePartDefinition,
             BuildDisplayContext context)
         {
-            var partName = contentTypePartDescriptor.Name;
-            var partTypeName = contentTypePartDescriptor.Part.Name;
-            var partType = _contentParts.FirstOrDefault(x => x.GetType().Name == partTypeName)?.GetType() ?? typeof(ContentPart);
+            var partName = contentTypePartDefinition.Name;
+            var partTypeName = contentTypePartDefinition.Part.Name;
+            var partType = _contentParts.FirstOrDefault(x => x.GetType().Name == partTypeName)?.GetType() ??
+                           typeof(ContentPart);
 
             if (partType == null)
                 return;
@@ -76,9 +77,9 @@ namespace BlazingOrchard.Contents.Handlers
                 return;
 
             var drivers = _contentPartDisplayDrivers.Where(x => x.PartType == partType);
-            var partDisplayContext = new BuildPartDisplayContext(contentTypePartDescriptor, context)
+            var partDisplayContext = new BuildPartDisplayContext(contentTypePartDefinition, context)
             {
-                DefaultPosition = contentTypePartDescriptor.Settings.Position
+                DefaultPosition = contentTypePartDefinition.GetSettings<ContentTypePartSettings>().Position
             };
 
             foreach (var driver in drivers)
@@ -87,20 +88,20 @@ namespace BlazingOrchard.Contents.Handlers
                 await ApplyDisplayResultAsync(result, context);
             }
 
-            await BuildContentFieldsDisplaysAsync(contentItem, contentPart, contentTypePartDescriptor, context);
+            await BuildContentFieldsDisplaysAsync(contentItem, contentPart, contentTypePartDefinition, context);
         }
 
         private async ValueTask BuildContentFieldsDisplaysAsync(
             ContentItem contentItem,
             ContentPart contentPart,
-            ContentTypePartDescriptor contentTypePartDescriptor,
+            ContentTypePartDefinition contentTypePartDefinition,
             BuildDisplayContext context)
         {
-            foreach (var contentPartFieldDescriptor in contentTypePartDescriptor.Part.Fields)
+            foreach (var contentPartFieldDescriptor in contentTypePartDefinition.Part.Fields)
                 await BuildContentFieldDisplaysAsync(
                     contentItem,
                     contentPart,
-                    contentTypePartDescriptor,
+                    contentTypePartDefinition,
                     contentPartFieldDescriptor,
                     context);
         }
@@ -108,12 +109,12 @@ namespace BlazingOrchard.Contents.Handlers
         private async ValueTask BuildContentFieldDisplaysAsync(
             ContentItem contentItem,
             ContentPart contentPart,
-            ContentTypePartDescriptor contentTypePartDescriptor,
-            ContentPartFieldDescriptor contentPartFieldDescriptor,
+            ContentTypePartDefinition contentTypePartDefinition,
+            ContentPartFieldDefinition contentPartFieldDefinition,
             BuildDisplayContext context)
         {
-            var fieldName = contentPartFieldDescriptor.Name;
-            var fieldTypeName = contentPartFieldDescriptor.Field.Name;
+            var fieldName = contentPartFieldDefinition.Name;
+            var fieldTypeName = contentPartFieldDefinition.FieldDefinition.Name;
             var fieldType = _contentFields.FirstOrDefault(x => x.GetType().Name == fieldTypeName)?.GetType();
 
             if (fieldType == null)
@@ -123,9 +124,14 @@ namespace BlazingOrchard.Contents.Handlers
                 return;
 
             var drivers = _contentFieldDisplayDrivers.Where(x => x.FieldType == fieldType);
-            var fieldDisplayContext = new BuildFieldDisplayContext(contentTypePartDescriptor, contentPartFieldDescriptor, context)
+            
+            var fieldDisplayContext = new BuildFieldDisplayContext(
+                contentPart,
+                contentTypePartDefinition,
+                contentPartFieldDefinition,
+                context)
             {
-                DefaultPosition = contentPartFieldDescriptor.Settings.Position
+                DefaultPosition = contentPartFieldDefinition.GetSettings<ContentPartFieldSettings>().Position
             };
 
             foreach (var driver in drivers)

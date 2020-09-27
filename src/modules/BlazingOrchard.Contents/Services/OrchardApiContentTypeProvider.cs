@@ -12,7 +12,7 @@ namespace BlazingOrchard.Contents.Services
         public OrchardApiContentTypeProvider(IContentTypeClient contentTypeClient) =>
             _contentTypeClient = contentTypeClient;
 
-        public async Task<ContentTypeDescriptor> GetAsync(string contentType,
+        public async Task<ContentTypeDefinition> GetAsync(string contentType,
             CancellationToken cancellationToken = default) =>
             await _contentTypeClient.GetByNameAsync(contentType, cancellationToken);
     }

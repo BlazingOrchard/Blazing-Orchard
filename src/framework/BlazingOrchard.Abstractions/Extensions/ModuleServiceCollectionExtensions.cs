@@ -4,6 +4,7 @@ using System.Reflection;
 using BlazingOrchard.Attributes;
 using BlazingOrchard.Helpers;
 using BlazingOrchard.Modules;
+using BlazingOrchard.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazingOrchard.Extensions

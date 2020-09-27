@@ -13,6 +13,7 @@ namespace BlazingOrchard.Web.Application
             yield return typeof(BlazingOrchard.Html.Startup).Assembly;
             yield return typeof(BlazingOrchard.ContentFields.Startup).Assembly;
             yield return typeof(BlazingOrchard.Menu.Startup).Assembly;
+            yield return typeof(BlazingOrchard.Markdown.Startup).Assembly;
             yield return typeof(Modules).Assembly;
         }
     }

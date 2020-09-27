@@ -46,6 +46,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingOrchard.Menu", "modu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingOrchard.Alias", "modules\BlazingOrchard.Alias\BlazingOrchard.Alias.csproj", "{A1F0BAE2-4F35-4BA4-9903-1CCB2C8C35CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingOrchard.Markdown", "modules\BlazingOrchard.Markdown\BlazingOrchard.Markdown.csproj", "{6095D2CA-BF44-4DA7-A3F3-2F0B5D2FE007}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingOrchard.Core", "framework\BlazingOrchard.Core\BlazingOrchard.Core.csproj", "{07338853-9A70-41EB-A93D-55B43D324AD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -112,6 +116,14 @@ Global
 		{A1F0BAE2-4F35-4BA4-9903-1CCB2C8C35CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1F0BAE2-4F35-4BA4-9903-1CCB2C8C35CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1F0BAE2-4F35-4BA4-9903-1CCB2C8C35CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6095D2CA-BF44-4DA7-A3F3-2F0B5D2FE007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6095D2CA-BF44-4DA7-A3F3-2F0B5D2FE007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6095D2CA-BF44-4DA7-A3F3-2F0B5D2FE007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6095D2CA-BF44-4DA7-A3F3-2F0B5D2FE007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07338853-9A70-41EB-A93D-55B43D324AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07338853-9A70-41EB-A93D-55B43D324AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07338853-9A70-41EB-A93D-55B43D324AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07338853-9A70-41EB-A93D-55B43D324AD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,5 +150,7 @@ Global
 		{4F19134B-7B6E-472C-99C4-8D8781B03F33} = {8C2597E9-A1E2-4896-9608-76296714798D}
 		{1C783038-6B71-4A6C-BE0D-1D59A469CD2B} = {AC702ED6-C53D-4F26-BF45-752811A0F9D5}
 		{A1F0BAE2-4F35-4BA4-9903-1CCB2C8C35CD} = {AC702ED6-C53D-4F26-BF45-752811A0F9D5}
+		{6095D2CA-BF44-4DA7-A3F3-2F0B5D2FE007} = {AC702ED6-C53D-4F26-BF45-752811A0F9D5}
+		{07338853-9A70-41EB-A93D-55B43D324AD5} = {3529A6F1-0722-4DC5-A67D-D083F3997B78}
 	EndGlobalSection
 EndGlobal
