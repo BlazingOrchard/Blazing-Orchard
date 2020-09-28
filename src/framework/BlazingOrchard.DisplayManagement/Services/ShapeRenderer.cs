@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BlazingOrchard.DisplayManagement.Blazor;
+using BlazingOrchard.DisplayManagement.Components;
 using BlazingOrchard.DisplayManagement.Models;
 using BlazingOrchard.DisplayManagement.Shapes;
 using BlazingOrchard.Extensions;
@@ -38,8 +39,12 @@ namespace BlazingOrchard.DisplayManagement.Services
         public async Task<string> RenderShapeAsStringAsync(IShape shape, CancellationToken cancellationToken)
         {
             var host = new TestHost(_serviceProvider);
-            var attributes = new Dictionary<string, object>{ ["Model"] = shape };
             var componentType = await GetComponentTypeAsync(shape);
+            var attributes = new Dictionary<string, object>();
+
+            if (componentType.IsAssignableTo(typeof(ShapeTemplate))) 
+                attributes["Model"] = shape;
+
             var renderedComponent = host.AddComponent(componentType, attributes);
             return renderedComponent.GetMarkup();
         }
@@ -96,7 +101,10 @@ namespace BlazingOrchard.DisplayManagement.Services
         private RenderFragment RenderComponent(Type componentType, IShape shape) => builder =>
         {
             builder.OpenComponent(0, componentType);
-            builder.AddAttribute(1, "Model", shape);
+            
+            if(componentType.IsAssignableTo(typeof(ShapeTemplate)))
+                builder.AddAttribute(1, "Model", shape);
+            
             builder.CloseComponent();
         };
     }

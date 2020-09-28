@@ -51,11 +51,9 @@ namespace BlazingOrchard.DisplayManagement.Services
                 }
 
                 var mergedDescriptors = MergeDescriptors(shapeDescriptors).ToDictionary(x => x.ShapeType);
-
-                var componentTypes = _componentTypeProvider.GetComponentTypes()
-                    .Where(x => x.IsAssignableTo(typeof(ShapeTemplate)));
-
+                var componentTypes = _componentTypeProvider.GetComponentTypes();
                 var bindings = componentTypes.SelectMany(GetShapeBindings);
+
                 _shapeTable = new ShapeTable(bindings.ToList(), mergedDescriptors);
             }
 

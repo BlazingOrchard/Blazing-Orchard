@@ -6,6 +6,7 @@ using BlazingOrchard.DisplayManagement.Extensions;
 using BlazingOrchard.DisplayManagement.Models;
 using BlazingOrchard.DisplayManagement.Services;
 using BlazingOrchard.DisplayManagement.Shapes;
+using BlazingOrchard.Liquid.FluidTypes;
 using Fluid;
 using Fluid.Values;
 using Humanizer;
@@ -66,7 +67,7 @@ namespace BlazingOrchard.Liquid.Filters
 
         public static ValueTask<FluidValue> ShapeStringify(FluidValue input, FilterArguments arguments, TemplateContext context)
         {
-            static async ValueTask<FluidValue> Awaited(Task<string> task) => new StringValue(await task);
+            static async ValueTask<FluidValue> Awaited(Task<string> task) => new HtmlContentValue(await task);
 
             if (input.ToObjectValue() is IShape shape)
             {
@@ -75,7 +76,7 @@ namespace BlazingOrchard.Liquid.Filters
                         "DisplayHelper missing while invoking 'shape_stringify'");
 
                 var task = displayHelper.RenderShapeAsStringAsync(shape);
-                return !task.IsCompletedSuccessfully ? Awaited(task) : new ValueTask<FluidValue>(new StringValue(task.Result));
+                return !task.IsCompletedSuccessfully ? Awaited(task) : new ValueTask<FluidValue>(new HtmlContentValue(task.Result));
             }
 
             return new ValueTask<FluidValue>(NilValue.Instance);
@@ -83,16 +84,16 @@ namespace BlazingOrchard.Liquid.Filters
 
         public static ValueTask<FluidValue> ShapeRender(FluidValue input, FilterArguments arguments, TemplateContext context)
         {
-            static async ValueTask<FluidValue> Awaited(Task<string> task) => new StringValue(await task);
+            static async ValueTask<FluidValue> Awaited(Task<string> task) => new HtmlContentValue(await task);
 
             if (input.ToObjectValue() is IShape shape)
             {
-                if (!context.AmbientValues.TryGetValue("DisplayHelper", out var item) || !(item is IShapeRenderer displayHelper))
+                if (!context.AmbientValues.TryGetValue("ShapeRenderer", out var item) || !(item is IShapeRenderer shapeRenderer))
                     return ThrowArgumentException<ValueTask<FluidValue>>(
                         "DisplayHelper missing while invoking 'shape_render'");
 
-                var task = displayHelper.RenderShapeAsStringAsync(shape);
-                return !task.IsCompletedSuccessfully ? Awaited(task) : new ValueTask<FluidValue>(new StringValue(task.Result));
+                var task = shapeRenderer.RenderShapeAsStringAsync(shape);
+                return !task.IsCompletedSuccessfully ? Awaited(task) : new ValueTask<FluidValue>(new HtmlContentValue(task.Result));
             }
 
             return new ValueTask<FluidValue>(NilValue.Instance);

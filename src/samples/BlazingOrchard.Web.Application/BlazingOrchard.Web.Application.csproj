@@ -6,13 +6,13 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.1.20451.17"/>
-        <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rc.1.20451.14"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.1.20451.17" />
+        <PackageReference Include="System.Net.Http.Json" Version="5.0.0-rc.1.20451.14" />
     </ItemGroup>
     
     <ItemGroup>
-        <ProjectReference Include="..\..\framework\BlazingOrchard\BlazingOrchard.csproj"/>
-        <ProjectReference Include="..\..\modules\BlazingOrchard.Menu\BlazingOrchard.Menu.csproj"/>
+        <ProjectReference Include="..\..\framework\BlazingOrchard\BlazingOrchard.csproj" />
+        <ProjectReference Include="..\..\modules\BlazingOrchard.Menu\BlazingOrchard.Menu.csproj" />
     </ItemGroup>
 
 </Project>
