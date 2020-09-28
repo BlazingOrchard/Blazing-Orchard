@@ -15,19 +15,19 @@ namespace BlazingOrchard.Liquid.Filters
 {
     public static class LiquidViewFilters
     {
-        private static readonly AsyncFilterDelegate _htmlClassDelegate = HtmlClass;
-        private static readonly AsyncFilterDelegate _newShapeDelegate = NewShape;
-        private static readonly AsyncFilterDelegate _shapeRenderDelegate = ShapeRender;
-        private static readonly AsyncFilterDelegate _shapeStringifyDelegate = ShapeStringify;
-        private static readonly FilterDelegate _shapePropertiesDelegate = ShapeProperties;
+        private static readonly AsyncFilterDelegate HtmlClassDelegate = HtmlClass;
+        private static readonly AsyncFilterDelegate NewShapeDelegate = NewShape;
+        private static readonly AsyncFilterDelegate ShapeRenderDelegate = ShapeRender;
+        private static readonly AsyncFilterDelegate ShapeStringifyDelegate = ShapeStringify;
+        private static readonly FilterDelegate ShapePropertiesDelegate = ShapeProperties;
 
         public static FilterCollection WithLiquidViewFilters(this FilterCollection filters)
         {
-            filters.AddAsyncFilter("html_class", _htmlClassDelegate);
-            filters.AddAsyncFilter("shape_new", _newShapeDelegate);
-            filters.AddAsyncFilter("shape_render", _shapeRenderDelegate);
-            filters.AddAsyncFilter("shape_stringify", _shapeStringifyDelegate);
-            filters.AddFilter("shape_properties", _shapePropertiesDelegate);
+            filters.AddAsyncFilter("html_class", HtmlClassDelegate);
+            filters.AddAsyncFilter("shape_new", NewShapeDelegate);
+            filters.AddAsyncFilter("shape_render", ShapeRenderDelegate);
+            filters.AddAsyncFilter("shape_stringify", ShapeStringifyDelegate);
+            filters.AddFilter("shape_properties", ShapePropertiesDelegate);
 
             return filters;
         }

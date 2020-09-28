@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using BlazingOrchard.Liquid.Models;
 using BlazingOrchard.Liquid.Services;
 using Fluid;
 

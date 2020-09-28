@@ -6,7 +6,7 @@ using BlazingOrchard.Liquid.Tags;
 using Fluid;
 using Fluid.Values;
 
-namespace BlazingOrchard.Liquid.Services
+namespace BlazingOrchard.Liquid.Models
 {
     public class LiquidViewTemplate : BaseFluidTemplate<LiquidViewTemplate>
     {
