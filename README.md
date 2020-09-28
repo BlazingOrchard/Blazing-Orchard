@@ -25,7 +25,7 @@ With Blazing Orchard, you build your SPA application as you normally would, but 
 ### Parts
 - [x] HtmlBodyPart
 - [x] MarkdownPart
-- [ ] LiquidPart
+- [x] LiquidPart
 - [ ] FlowPart
 - [ ] BagPart
 - [ ] ListPart
