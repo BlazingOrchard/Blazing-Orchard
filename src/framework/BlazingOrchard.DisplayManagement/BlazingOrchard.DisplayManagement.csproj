@@ -7,11 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Fizzler.Systems.HtmlAgilityPack" Version="1.2.1" />
+        <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
         <PackageReference Include="Humanizer.Core" Version="2.8.26" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.1.20451.17" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\BlazorUnitTestingPrototype\Microsoft.AspNetCore.Components.Testing\Microsoft.AspNetCore.Components.Testing.csproj" />
       <ProjectReference Include="..\BlazingOrchard.Abstractions\BlazingOrchard.Abstractions.csproj" />
     </ItemGroup>
 

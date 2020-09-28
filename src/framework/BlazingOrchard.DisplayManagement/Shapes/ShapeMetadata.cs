@@ -11,10 +11,12 @@ namespace BlazingOrchard.DisplayManagement.Shapes
     {
         public string Type { get; set; } = default!;
         public string? DisplayType { get; set; }
+        public string? Position { get; set; }
         public string? Name { get; set; }
         public string? Differentiator { get; set; }
         public string? PlacementSource { get; set; }
         public AlternatesCollection Alternates { get; set; } = new AlternatesCollection();
+        public AlternatesCollection Wrappers { get; set; } = new AlternatesCollection();
 
         /// <summary>
         /// Event used for a specific shape instance.
