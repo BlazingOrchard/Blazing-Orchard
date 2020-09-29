@@ -16,6 +16,8 @@ namespace BlazingOrchard.Title.Drivers
                         shape.ContentItem = contentPart.ContentItem;
                         shape.Title = contentPart.ContentItem.DisplayText;
                         shape.TitlePart = contentPart;
+
+                        shape.Metadata.Alternates.Add($"{contentPart.ContentItem.ContentType}__{shape.Metadata.Type}");
                         return shape;
                     })
                 .DefaultLocation("1");
