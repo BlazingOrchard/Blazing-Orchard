@@ -4,6 +4,9 @@ using BlazingOrchard.Contents.Display.Services;
 using BlazingOrchard.DisplayManagement.Services;
 using BlazingOrchard.DisplayManagement.Shapes;
 using BlazingOrchard.Liquid.Models;
+using BlazingOrchard.Liquid.TextWriters;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazingOrchard.Liquid.Drivers
 {
@@ -11,11 +14,16 @@ namespace BlazingOrchard.Liquid.Drivers
     {
         private readonly ILiquidTemplateManager _liquidTemplateManager;
         private readonly HtmlEncoder _htmlEncoder;
+        private readonly IShapeRenderer _shapeRenderer;
 
-        public LiquidPartDisplay(ILiquidTemplateManager liquidTemplateManager, HtmlEncoder htmlEncoder)
+        public LiquidPartDisplay(
+            ILiquidTemplateManager liquidTemplateManager,
+            HtmlEncoder htmlEncoder,
+            IShapeRenderer shapeRenderer)
         {
             _liquidTemplateManager = liquidTemplateManager;
             _htmlEncoder = htmlEncoder;
+            _shapeRenderer = shapeRenderer;
         }
 
         protected override IDisplayResult? BuildDisplay(LiquidPart contentPart)
@@ -28,17 +36,35 @@ namespace BlazingOrchard.Liquid.Drivers
                         shape.ContentItem = contentPart.ContentItem;
                         shape.Liquid = contentPart.Liquid!;
                         shape.LiquidBodyPart = contentPart;
-                        shape.Html = (await ToHtmlAsync(contentPart, shape)) ?? "";
+                        //shape.Html = (await ToHtmlAsync(contentPart, shape)) ?? "";
+                        shape.RenderLiquid = (RenderFragment)(b => RenderLiquid(b, contentPart, shape));
+
                         return shape;
                     })
                 .DefaultLocation("5");
         }
 
-        private async Task<string?> ToHtmlAsync(LiquidPart liquidPart, IShape shape) =>
-            await _liquidTemplateManager.RenderAsync(
+        private void RenderLiquid(RenderTreeBuilder builder, LiquidPart liquidPart, IShape shape)
+        {
+            var writer = new ShapeWriter(builder, _shapeRenderer);
+
+            _liquidTemplateManager.RenderAsync(
+                liquidPart.Liquid,
+                writer,
+                _htmlEncoder,
+                shape,
+                scope => { scope.SetValue("ContentItem", liquidPart.ContentItem); }).GetAwaiter().GetResult();
+
+            //builder.AddMarkupContent(0, "<strong>Hey, it's me!</strong>");
+        }
+
+        private async Task<string?> ToHtmlAsync(LiquidPart liquidPart, IShape shape)
+        {
+            return await _liquidTemplateManager.RenderAsync(
                 liquidPart.Liquid,
                 _htmlEncoder,
                 shape,
-                scope => scope.SetValue("ContentItem", liquidPart.ContentItem));
+                scope => { scope.SetValue("ContentItem", liquidPart.ContentItem); });
+        }
     }
 }
