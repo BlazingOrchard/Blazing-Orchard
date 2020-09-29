@@ -18,10 +18,4 @@
         <ProjectReference Include="..\..\framework\BlazingOrchard.Liquid.Abstractions\BlazingOrchard.Liquid.Abstractions.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\background.png" />
-      <_ContentIncludedByDefault Remove="wwwroot\exampleJsInterop.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\styles.css" />
-    </ItemGroup>
-
 </Project>

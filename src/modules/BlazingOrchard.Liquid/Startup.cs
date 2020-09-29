@@ -18,4 +18,6 @@ namespace BlazingOrchard.Liquid
                 .AddSingleton<ILiquidTemplateManager, LiquidTemplateManager>();
         }
     }
+
+    
 }
