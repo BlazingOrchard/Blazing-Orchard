@@ -6,19 +6,27 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazingOrchard.Liquid.TextWriters
 {
-    internal class ShapeWriter : TextWriter
+    internal class RenderTreeWriter : TextWriter
     {
         private readonly RenderTreeBuilder _builder;
         private readonly IShapeRenderer _shapeRenderer;
         private int _sequence;
 
-        public ShapeWriter(RenderTreeBuilder builder, IShapeRenderer shapeRenderer)
+        public RenderTreeWriter(RenderTreeBuilder builder, IShapeRenderer shapeRenderer)
         {
             _builder = builder;
             _shapeRenderer = shapeRenderer;
         }
 
         public override Encoding Encoding => Encoding.UTF8;
+
+        public override void Write(string? value) => _builder.AddMarkupContent(_sequence++, value);
+
+        public override void Write(char[]? buffer)
+        {
+            var text = new string(buffer);
+            _builder.AddMarkupContent(_sequence++, text);
+        }
 
         public override void Write(object? value)
         {
