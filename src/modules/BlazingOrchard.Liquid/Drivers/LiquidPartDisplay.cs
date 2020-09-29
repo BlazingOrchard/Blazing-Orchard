@@ -36,7 +36,6 @@ namespace BlazingOrchard.Liquid.Drivers
                         shape.ContentItem = contentPart.ContentItem;
                         shape.Liquid = contentPart.Liquid!;
                         shape.LiquidBodyPart = contentPart;
-                        //shape.Html = (await ToHtmlAsync(contentPart, shape)) ?? "";
                         shape.RenderLiquid = (RenderFragment)(b => RenderLiquid(b, contentPart, shape));
 
                         return shape;
@@ -46,7 +45,7 @@ namespace BlazingOrchard.Liquid.Drivers
 
         private void RenderLiquid(RenderTreeBuilder builder, LiquidPart liquidPart, IShape shape)
         {
-            var writer = new ShapeWriter(builder, _shapeRenderer);
+            var writer = new RenderTreeWriter(builder, _shapeRenderer);
 
             _liquidTemplateManager.RenderAsync(
                 liquidPart.Liquid,
@@ -54,17 +53,6 @@ namespace BlazingOrchard.Liquid.Drivers
                 _htmlEncoder,
                 shape,
                 scope => { scope.SetValue("ContentItem", liquidPart.ContentItem); }).GetAwaiter().GetResult();
-
-            //builder.AddMarkupContent(0, "<strong>Hey, it's me!</strong>");
-        }
-
-        private async Task<string?> ToHtmlAsync(LiquidPart liquidPart, IShape shape)
-        {
-            return await _liquidTemplateManager.RenderAsync(
-                liquidPart.Liquid,
-                _htmlEncoder,
-                shape,
-                scope => { scope.SetValue("ContentItem", liquidPart.ContentItem); });
         }
     }
 }

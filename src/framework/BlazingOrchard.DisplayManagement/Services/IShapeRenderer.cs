@@ -15,6 +15,6 @@ namespace BlazingOrchard.DisplayManagement.Services
             RenderTreeBuilder renderTreeBuilder,
             CancellationToken cancellationToken = default);
 
-        Task<string> RenderShapeAsStringAsync(IShape shape, CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using BlazingOrchard.DisplayManagement.Blazor;
@@ -42,19 +43,6 @@ namespace BlazingOrchard.DisplayManagement.Services
         {
             var componentType = await GetComponentTypeAsync(shape);
             return RenderComponent(componentType, shape, sequence, renderTreeBuilder);
-        }
-
-        public async Task<string> RenderShapeAsStringAsync(IShape shape, CancellationToken cancellationToken)
-        {
-            var host = new TestHost(_serviceProvider);
-            var componentType = await GetComponentTypeAsync(shape);
-            var attributes = new Dictionary<string, object>();
-
-            if (componentType.IsAssignableTo(typeof(ShapeTemplate)))
-                attributes["Model"] = shape;
-
-            var renderedComponent = host.AddComponent(componentType, attributes);
-            return renderedComponent.GetMarkup();
         }
 
         private async Task<Type> GetComponentTypeAsync(IShape shape)
@@ -115,6 +103,16 @@ namespace BlazingOrchard.DisplayManagement.Services
 
             if (componentType.IsAssignableTo(typeof(ShapeTemplate)))
                 builder.AddAttribute(sequence++, "Model", shape);
+
+            var publicProperties =
+                from shapeProperty in shape.Properties
+                let componentProperty = componentType.GetProperty(shapeProperty.Key)
+                let hasParameter = componentProperty?.GetCustomAttribute<ParameterAttribute>() != null
+                where hasParameter
+                select shapeProperty;
+            
+            foreach (var shapeProperty in publicProperties)
+                builder.AddAttribute(sequence++, shapeProperty.Key, shapeProperty.Value);
 
             builder.CloseComponent();
             return sequence;

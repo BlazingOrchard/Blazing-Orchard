@@ -26,7 +26,7 @@ namespace BlazingOrchard.DisplayManagement.Services
                     where type.IsAssignableTo(typeof(IComponent))
                     select type;
 
-                _componentTypes = query.ToList();
+                _componentTypes = query.Reverse().ToList();
             }
 
             return _componentTypes;

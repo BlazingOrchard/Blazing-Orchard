@@ -34,7 +34,7 @@ namespace BlazingOrchard.Liquid.Tags
                     foreach (var name in arguments.Names)
                     {
                         var argument = arguments[name];
-                        var propertyName = name.Pascalize().Underscore();
+                        var propertyName = name.Underscore().Pascalize();
 
                         if (_properties.Contains(propertyName))
                         {
