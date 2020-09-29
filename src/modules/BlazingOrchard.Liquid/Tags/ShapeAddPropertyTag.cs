@@ -21,7 +21,7 @@ namespace BlazingOrchard.Liquid.Tags
 
                 foreach (var name in arguments.Names)
                 {
-                    shape.Properties[name.Pascalize().Underscore()] = arguments[name].ToObjectValue();
+                    shape.Properties[name.Underscore().Pascalize()] = arguments[name].ToObjectValue();
                 }
             }
 

@@ -21,7 +21,7 @@ namespace BlazingOrchard.Liquid.Tags
                 var propName = arguments["property"].Or(arguments.At(0)).ToStringValue();
                 if (!string.IsNullOrEmpty(propName))
                 {
-                    shape.Properties.Remove(propName.Pascalize().Underscore());
+                    shape.Properties.Remove(propName.Underscore().Pascalize());
                 }
             }
 
