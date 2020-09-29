@@ -32,72 +32,49 @@ namespace BlazingOrchard.Liquid.Filters
             return filters;
         }
 
-        public static ValueTask<FluidValue> HtmlClass(FluidValue input, FilterArguments arguments, TemplateContext context)
+        public static ValueTask<FluidValue> HtmlClass(FluidValue input,
+            FilterArguments arguments,
+            TemplateContext context)
         {
             return new ValueTask<FluidValue>(new StringValue(input.ToStringValue().Camelize()));
         }
 
-        public static ValueTask<FluidValue> NewShape(FluidValue input, FilterArguments arguments, TemplateContext context)
+        public static ValueTask<FluidValue> NewShape(FluidValue input,
+            FilterArguments arguments,
+            TemplateContext context)
         {
-            static async ValueTask<FluidValue> Awaited(ValueTask<IShape> task)
-            {
-                return FluidValue.Create(await task);
-            }
+            static async ValueTask<FluidValue> Awaited(ValueTask<IShape> task) => FluidValue.Create(await task);
 
-            if (!context.AmbientValues.TryGetValue("ShapeFactory", out var item) || !(item is IShapeFactory shapeFactory))
-            {
+            if (!context.AmbientValues.TryGetValue("ShapeFactory", out var item) ||
+                !(item is IShapeFactory shapeFactory))
                 return ThrowArgumentException<ValueTask<FluidValue>>("ShapeFactory missing while invoking 'shape_new'");
-            }
 
             var type = input.ToStringValue();
             var properties = new Dictionary<string, object>(arguments.Count);
 
             foreach (var name in arguments.Names)
-            {
                 properties.Add(name.Pascalize().Underscore(), arguments[name].ToObjectValue());
-            }
 
             var task = shapeFactory.CreateAsync(type, Arguments.From(properties));
+            
             if (!task.IsCompletedSuccessfully)
-            {
                 return Awaited(task);
-            }
+
             return new ValueTask<FluidValue>(FluidValue.Create(task.Result));
         }
 
-        public static ValueTask<FluidValue> ShapeStringify(FluidValue input, FilterArguments arguments, TemplateContext context)
-        {
-            static async ValueTask<FluidValue> Awaited(Task<string> task) => new HtmlContentValue(await task);
+        public static ValueTask<FluidValue> ShapeStringify(FluidValue input,
+            FilterArguments arguments,
+            TemplateContext context) => input.ToObjectValue() is IShape shape
+            ? new ValueTask<FluidValue>(new ShapeValue(shape))
+            : new ValueTask<FluidValue>(NilValue.Instance);
 
-            if (input.ToObjectValue() is IShape shape)
-            {
-                if (!context.AmbientValues.TryGetValue("DisplayHelper", out var item) || !(item is IShapeRenderer displayHelper))
-                    return ThrowArgumentException<ValueTask<FluidValue>>(
-                        "DisplayHelper missing while invoking 'shape_stringify'");
-
-                var task = displayHelper.RenderShapeAsStringAsync(shape);
-                return !task.IsCompletedSuccessfully ? Awaited(task) : new ValueTask<FluidValue>(new HtmlContentValue(task.Result));
-            }
-
-            return new ValueTask<FluidValue>(NilValue.Instance);
-        }
-
-        public static ValueTask<FluidValue> ShapeRender(FluidValue input, FilterArguments arguments, TemplateContext context)
-        {
-            static async ValueTask<FluidValue> Awaited(Task<string> task) => new HtmlContentValue(await task);
-
-            if (input.ToObjectValue() is IShape shape)
-            {
-                if (!context.AmbientValues.TryGetValue("ShapeRenderer", out var item) || !(item is IShapeRenderer shapeRenderer))
-                    return ThrowArgumentException<ValueTask<FluidValue>>(
-                        "DisplayHelper missing while invoking 'shape_render'");
-
-                var task = shapeRenderer.RenderShapeAsStringAsync(shape);
-                return !task.IsCompletedSuccessfully ? Awaited(task) : new ValueTask<FluidValue>(new HtmlContentValue(task.Result));
-            }
-
-            return new ValueTask<FluidValue>(NilValue.Instance);
-        }
+        public static ValueTask<FluidValue> ShapeRender(FluidValue input,
+            FilterArguments arguments,
+            TemplateContext context) =>
+            input.ToObjectValue() is IShape shape
+                ? new ValueTask<FluidValue>(new ShapeValue(shape))
+                : new ValueTask<FluidValue>(NilValue.Instance);
 
         public static FluidValue ShapeProperties(FluidValue input, FilterArguments arguments, TemplateContext context)
         {
@@ -105,7 +82,7 @@ namespace BlazingOrchard.Liquid.Filters
             {
                 foreach (var name in arguments.Names)
                     shape.Properties[name.Pascalize().Underscore()] = arguments[name].ToObjectValue();
-                
+
                 return FluidValue.Create(shape);
             }
 

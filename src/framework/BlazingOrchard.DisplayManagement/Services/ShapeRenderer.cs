@@ -22,7 +22,6 @@ namespace BlazingOrchard.DisplayManagement.Services
 
         public ShapeRenderer(IShapeTableManager shapeTableManager,
             IServiceProvider serviceProvider,
-            ILoggerFactory loggerFactory,
             ILogger<ShapeRenderer> logger)
         {
             _shapeTableManager = shapeTableManager;
@@ -35,14 +34,23 @@ namespace BlazingOrchard.DisplayManagement.Services
             var componentType = await GetComponentTypeAsync(shape);
             return RenderComponent(componentType, shape);
         }
-        
+
+        public async Task<int> RenderShapeAsync(IShape shape,
+            int sequence,
+            RenderTreeBuilder renderTreeBuilder,
+            CancellationToken cancellationToken)
+        {
+            var componentType = await GetComponentTypeAsync(shape);
+            return RenderComponent(componentType, shape, sequence, renderTreeBuilder);
+        }
+
         public async Task<string> RenderShapeAsStringAsync(IShape shape, CancellationToken cancellationToken)
         {
             var host = new TestHost(_serviceProvider);
             var componentType = await GetComponentTypeAsync(shape);
             var attributes = new Dictionary<string, object>();
 
-            if (componentType.IsAssignableTo(typeof(ShapeTemplate))) 
+            if (componentType.IsAssignableTo(typeof(ShapeTemplate)))
                 attributes["Model"] = shape;
 
             var renderedComponent = host.AddComponent(componentType, attributes);
@@ -98,14 +106,18 @@ namespace BlazingOrchard.DisplayManagement.Services
             return binding.ComponentType;
         }
 
-        private RenderFragment RenderComponent(Type componentType, IShape shape) => builder =>
+        private RenderFragment RenderComponent(Type componentType, IShape shape) =>
+            builder => RenderComponent(componentType, shape, 0, builder);
+
+        private int RenderComponent(Type componentType, IShape shape, int sequence, RenderTreeBuilder builder)
         {
-            builder.OpenComponent(0, componentType);
-            
-            if(componentType.IsAssignableTo(typeof(ShapeTemplate)))
-                builder.AddAttribute(1, "Model", shape);
-            
+            builder.OpenComponent(sequence++, componentType);
+
+            if (componentType.IsAssignableTo(typeof(ShapeTemplate)))
+                builder.AddAttribute(sequence++, "Model", shape);
+
             builder.CloseComponent();
-        };
+            return sequence;
+        }
     }
 }

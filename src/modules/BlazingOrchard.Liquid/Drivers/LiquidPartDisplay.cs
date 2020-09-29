@@ -1,11 +1,10 @@
-﻿using System.IO;
-using System.Text;
-using System.Text.Encodings.Web;
+﻿using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using BlazingOrchard.Contents.Display.Services;
 using BlazingOrchard.DisplayManagement.Services;
 using BlazingOrchard.DisplayManagement.Shapes;
 using BlazingOrchard.Liquid.Models;
+using BlazingOrchard.Liquid.TextWriters;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
@@ -15,11 +14,16 @@ namespace BlazingOrchard.Liquid.Drivers
     {
         private readonly ILiquidTemplateManager _liquidTemplateManager;
         private readonly HtmlEncoder _htmlEncoder;
+        private readonly IShapeRenderer _shapeRenderer;
 
-        public LiquidPartDisplay(ILiquidTemplateManager liquidTemplateManager, HtmlEncoder htmlEncoder)
+        public LiquidPartDisplay(
+            ILiquidTemplateManager liquidTemplateManager,
+            HtmlEncoder htmlEncoder,
+            IShapeRenderer shapeRenderer)
         {
             _liquidTemplateManager = liquidTemplateManager;
             _htmlEncoder = htmlEncoder;
+            _shapeRenderer = shapeRenderer;
         }
 
         protected override IDisplayResult? BuildDisplay(LiquidPart contentPart)
@@ -34,7 +38,7 @@ namespace BlazingOrchard.Liquid.Drivers
                         shape.LiquidBodyPart = contentPart;
                         //shape.Html = (await ToHtmlAsync(contentPart, shape)) ?? "";
                         shape.RenderLiquid = (RenderFragment)(b => RenderLiquid(b, contentPart, shape));
-                        
+
                         return shape;
                     })
                 .DefaultLocation("5");
@@ -42,15 +46,15 @@ namespace BlazingOrchard.Liquid.Drivers
 
         private void RenderLiquid(RenderTreeBuilder builder, LiquidPart liquidPart, IShape shape)
         {
-            var writer = new RenderTreeWriter(builder);
-            
+            var writer = new ShapeWriter(builder, _shapeRenderer);
+
             _liquidTemplateManager.RenderAsync(
                 liquidPart.Liquid,
                 writer,
                 _htmlEncoder,
                 shape,
                 scope => { scope.SetValue("ContentItem", liquidPart.ContentItem); }).GetAwaiter().GetResult();
-            
+
             //builder.AddMarkupContent(0, "<strong>Hey, it's me!</strong>");
         }
 
@@ -61,32 +65,6 @@ namespace BlazingOrchard.Liquid.Drivers
                 _htmlEncoder,
                 shape,
                 scope => { scope.SetValue("ContentItem", liquidPart.ContentItem); });
-        }
-    }
-
-    internal class RenderTreeWriter : TextWriter
-    {
-        private readonly RenderTreeBuilder _builder;
-        private int _sequence;
-
-        public RenderTreeWriter(RenderTreeBuilder builder)
-        {
-            _builder = builder;
-        }
-        
-        public override Encoding Encoding { get; }
-
-        public override void Write(string? value)
-        {
-            _builder.AddMarkupContent(_sequence++, value);
-            //base.Write(value);
-        }
-
-        public override Task WriteAsync(string? value)
-        {
-            _builder.AddMarkupContent(_sequence++, value);
-            return Task.CompletedTask;
-            //return base.WriteAsync(value);
         }
     }
 }
