@@ -104,9 +104,15 @@ namespace BlazingOrchard.DisplayManagement.Services
             if (componentType.IsAssignableTo(typeof(ShapeTemplate)))
                 builder.AddAttribute(sequence++, "Model", shape);
 
-            foreach (var shapeProperty in shape.Properties)
-                if (componentType.GetProperty(shapeProperty.Key) != null)
-                    builder.AddAttribute(sequence++, shapeProperty.Key, shapeProperty.Value);
+            var publicProperties =
+                from shapeProperty in shape.Properties
+                let componentProperty = componentType.GetProperty(shapeProperty.Key)
+                let hasParameter = componentProperty?.GetCustomAttribute<ParameterAttribute>() != null
+                where hasParameter
+                select shapeProperty;
+            
+            foreach (var shapeProperty in publicProperties)
+                builder.AddAttribute(sequence++, shapeProperty.Key, shapeProperty.Value);
 
             builder.CloseComponent();
             return sequence;
